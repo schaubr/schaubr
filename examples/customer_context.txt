@@ -1,0 +1,59 @@
+Bedrijf: TechCorp Financial Services
+Industrie: Financiële dienstverlening
+Grootte: 750 medewerkers, €150M jaarlijkse omzet
+Locaties: 5 kantoren in Nederland (Amsterdam, Rotterdam, Utrecht, Eindhoven, Groningen)
+
+Huidige IT Landschap:
+- Voornamelijk on-premise infrastructuur in eigen datacenter
+- Mix van legacy mainframe systemen (25+ jaar oud) en moderne applicaties
+- Beperkte cloud adoptie (alleen Office 365)
+- Traditionele waterfall development voor meeste projecten
+- Handmatige deployment processen
+- Beperkte automation en monitoring
+
+Technische Stack:
+- Core Banking: IBM Mainframe (COBOL)
+- CRM: Custom .NET applicatie
+- Website: PHP op eigen servers
+- Database: Mix van Oracle, SQL Server, DB2
+- Integratie: Voornamelijk point-to-point, weinig API's
+
+Organisatie & Cultuur:
+- Risk-averse cultuur (typisch voor financiële sector)
+- Sterke siloed organisatie (IT, Business, Compliance apart)
+- Beperkte DevOps ervaring
+- Compliance & Security zeer belangrijk (AFM, DNB regelgeving)
+- Traditionele IT governance
+
+Huidige Uitdagingen:
+- Lange doorlooptijden voor nieuwe features (6-12 maanden)
+- Hoge operationele kosten (40% van IT budget aan maintenance)
+- Moeilijk om talent te vinden/behouden (legacy skills schaarst)
+- Toenemende security risico's door oude systemen
+- Beperkte schaalbaarheid tijdens piekbelasting
+
+Strategische Doelen (3 jaar):
+1. Moderniseren van IT infrastructuur
+2. Verbeteren van customer experience (digital-first)
+3. Verhogen van operationele efficiëntie (30% kostenreductie)
+4. Accelereren van digitale transformatie
+5. Verbeteren van data analytics capabilities
+6. Voldoen aan toekomstige regelgeving (DORA, PSD3)
+
+Budget:
+- IT budget: €15M per jaar
+- Transformatie budget beschikbaar: €8M over 3 jaar
+- Bereid te investeren in de juiste oplossingen
+
+Stakeholders:
+- CIO: Technisch vooruitstrevend, maar beperkt door bestuur
+- CFO: Kostengedreven, ROI moet duidelijk zijn
+- CCO (Chief Compliance Officer): Security en compliance prioriteit
+- Business units: Willen snellere innovatie
+
+Gewenste Outcomes:
+- Reduceren time-to-market naar 4-8 weken
+- Verhogen customer satisfaction scores met 25%
+- Verlagen operational IT costs met 30%
+- 100% compliance met alle huidige en toekomstige regelgeving
+- Aantrekken en behouden van top tech talent

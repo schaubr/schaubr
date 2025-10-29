@@ -1,0 +1,103 @@
+Specifieke Problematiek & Behoeften:
+
+KERN PROBLEMEN:
+
+1. Legacy Mainframe Systemen
+   - Core banking draait op 25+ jaar oude IBM mainframe
+   - COBOL code base van 2+ miljoen lines of code
+   - Kennis concentratie bij 3 senior developers (allen 55+, pensioen binnen 5 jaar)
+   - Geen documentatie van grote delen van de code
+   - Moeilijk/onmogelijk om te integreren met moderne systemen
+   - Hoge licentie- en onderhoudskosten (€2M+ per jaar)
+   - Vendor lock-in met beperkte support
+
+2. Innovatie Blokkade
+   - Nieuwe features vereisen maanden van ontwikkeling en testing
+   - Deployment windows slechts 4x per jaar
+   - Geen continuous integration/deployment
+   - Fear of change door gebrek aan automated testing
+   - Business ideeën worden technisch niet haalbaar bevonden
+   - Concurrenten (vooral fintechs) bewegen 10x sneller
+
+3. Data Silos & Analytics Beperkingen
+   - Data verspreid over 20+ systemen en databases
+   - Geen centrale data lake of warehouse
+   - Real-time data analytics niet mogelijk
+   - Handmatige rapportages (Excel exports)
+   - Geen mogelijkheid voor advanced analytics of AI/ML
+   - Compliance reporting zeer arbeidsintensief
+   - Data quality issues door gebrek aan governance
+
+4. Cloud & Infrastructure
+   - On-premise datacenter is end-of-life (5 jaar)
+   - Hoge operational overhead (24/7 support team)
+   - Beperkte disaster recovery capabilities (RPO: 24h, RTO: 48h)
+   - Geen auto-scaling bij piekbelasting
+   - Security patches vaak uitgesteld door impact vrees
+   - Inefficiënt resource gebruik (gemiddeld 30% utilization)
+
+5. Compliance & Security Risico's
+   - Nieuwe DORA regelgeving vereist digital operational resilience
+   - PSD3 en open banking vereisen moderne API's
+   - Huidige systemen voldoen niet aan moderne security standards
+   - Geen adequate logging en monitoring voor compliance
+   - Incident response procedures verouderd
+   - Third-party risk management ad-hoc
+   - Data privacy (GDPR) compliance arbeidsintensief
+
+6. Customer Experience
+   - Website en mobile app verouderd (gebouwd in 2015)
+   - Geen personalisatie of AI-driven recommendations
+   - Batch processing betekent updates 1x per dag
+   - Klanten verwachten real-time, zoals ze bij neo-banks zien
+   - Cross-channel ervaring inconsistent
+   - Customer onboarding duurt nog steeds 2-3 weken
+
+BUSINESS IMPACT:
+
+Meetbare Impact:
+- Marktaandeel daling: -2% per jaar laatste 3 jaar
+- Customer churn: 8% per jaar (industrie gemiddelde: 5%)
+- NPS score: 25 (fintechs: 50+)
+- Cost-to-income ratio: 68% (target: 50%)
+- IT costs stijgen 12% per jaar terwijl revenue +3%
+- Time-to-market nieuwe features: 9 maanden gemiddeld
+- System downtime: 20+ uur per jaar (€500K per uur)
+
+Competitieve Druk:
+- Neo-banks (bunq, N26) aantrekkelijker voor jongere klanten
+- Big tech (Apple, Google Pay) dringen markt binnen
+- Traditional competitors ook aan het moderniseren
+- Nieuwe entrants met cloud-native platforms
+
+GEWENSTE OPLOSSING:
+
+Prioriteiten:
+1. [HOOG] Modernisatie strategie voor core banking systemen
+2. [HOOG] Cloud migration roadmap en strategie
+3. [HOOG] Compliance & security framework voor nieuwe regelgeving
+4. [MEDIUM] DevOps transformatie en CI/CD implementatie
+5. [MEDIUM] Data platform voor analytics en AI/ML
+6. [MEDIUM] Customer experience verbetering (website, mobile)
+7. [LOW] Organisatorische change management
+
+Kritische Succesfactoren:
+- Minimale business disruption tijdens transitie
+- Behoud van compliance en security posture
+- Clear ROI binnen 18-24 maanden
+- Risk-managed approach (gefaseerd, met fallbacks)
+- Knowledge transfer en skill building van team
+- Stakeholder alignment (technical, business, compliance)
+
+Constraints:
+- Migratie moet gefaseerd (max 1 miljoen downtime per kwartaal)
+- Budget: €8M over 3 jaar (niet alles upfront)
+- Team capaciteit beperkt (15 FTE development team)
+- Regulatory approval nodig voor grote changes
+- Must maintain SOC2 en ISO27001 certificeringen
+
+Tijdlijn:
+- Business case & roadmap: 1-2 maanden
+- Quick wins / pilots: Q1 2025
+- Core transformatie: 2025-2027
+- Full transition compleet: 2027
