@@ -1,0 +1,1294 @@
+{
+  "name": "AI Context Service Recommender",
+  "description": "Een AI-gestuurd systeem dat automatisch relevante services, best practices en ervaringskennis aanreikt op basis van klantcontext en problematiek",
+  "data": {
+    "nodes": [
+      {
+        "id": "text-input-customer-context",
+        "type": "TextInput",
+        "position": {
+          "x": 100,
+          "y": 100
+        },
+        "data": {
+          "type": "TextInput",
+          "node": {
+            "template": {
+              "input_value": {
+                "type": "str",
+                "required": true,
+                "placeholder": "Voer de klantcontext in...",
+                "list": false,
+                "show": true,
+                "multiline": true,
+                "value": "",
+                "fileTypes": [],
+                "file_path": "",
+                "password": false,
+                "name": "input_value",
+                "display_name": "Customer Context",
+                "advanced": false,
+                "dynamic": false,
+                "info": "Beschrijving van de klant organisatie, hun huidige situatie, technologie stack, team grootte, etc.",
+                "title_case": false
+              }
+            },
+            "description": "Input voor klant organisatie context",
+            "base_classes": ["Message"],
+            "display_name": "Customer Context Input",
+            "documentation": "",
+            "custom_fields": {},
+            "output_types": [],
+            "pinned": false,
+            "conditional_paths": [],
+            "frozen": false,
+            "outputs": [
+              {
+                "types": ["Message"],
+                "selected": "Message",
+                "name": "text",
+                "display_name": "Text",
+                "method": "text_response",
+                "value": "__UNDEFINED__",
+                "cache": true
+              }
+            ],
+            "field_order": ["input_value"],
+            "beta": false,
+            "edited": false
+          }
+        }
+      },
+      {
+        "id": "text-input-problem-description",
+        "type": "TextInput",
+        "position": {
+          "x": 100,
+          "y": 300
+        },
+        "data": {
+          "type": "TextInput",
+          "node": {
+            "template": {
+              "input_value": {
+                "type": "str",
+                "required": true,
+                "placeholder": "Beschrijf het probleem...",
+                "list": false,
+                "show": true,
+                "multiline": true,
+                "value": "",
+                "fileTypes": [],
+                "file_path": "",
+                "password": false,
+                "name": "input_value",
+                "display_name": "Problem Description",
+                "advanced": false,
+                "dynamic": false,
+                "info": "Gedetailleerde beschrijving van de problematiek of uitdaging waar de klant mee worstelt",
+                "title_case": false
+              }
+            },
+            "description": "Input voor probleem beschrijving",
+            "base_classes": ["Message"],
+            "display_name": "Problem Description",
+            "documentation": "",
+            "custom_fields": {},
+            "output_types": [],
+            "pinned": false,
+            "conditional_paths": [],
+            "frozen": false,
+            "outputs": [
+              {
+                "types": ["Message"],
+                "selected": "Message",
+                "name": "text",
+                "display_name": "Text",
+                "method": "text_response",
+                "value": "__UNDEFINED__",
+                "cache": true
+              }
+            ],
+            "field_order": ["input_value"],
+            "beta": false,
+            "edited": false
+          }
+        }
+      },
+      {
+        "id": "text-input-industry",
+        "type": "TextInput",
+        "position": {
+          "x": 100,
+          "y": 500
+        },
+        "data": {
+          "type": "TextInput",
+          "node": {
+            "template": {
+              "input_value": {
+                "type": "str",
+                "required": true,
+                "placeholder": "Bijv. Financial Services, Retail, Healthcare...",
+                "list": false,
+                "show": true,
+                "multiline": false,
+                "value": "",
+                "fileTypes": [],
+                "file_path": "",
+                "password": false,
+                "name": "input_value",
+                "display_name": "Industry",
+                "advanced": false,
+                "dynamic": false,
+                "info": "De sector/industrie waarin de klant opereert",
+                "title_case": false
+              }
+            },
+            "description": "Input voor industrie classificatie",
+            "base_classes": ["Message"],
+            "display_name": "Industry/Sector",
+            "documentation": "",
+            "custom_fields": {},
+            "output_types": [],
+            "pinned": false,
+            "conditional_paths": [],
+            "frozen": false,
+            "outputs": [
+              {
+                "types": ["Message"],
+                "selected": "Message",
+                "name": "text",
+                "display_name": "Text",
+                "method": "text_response",
+                "value": "__UNDEFINED__",
+                "cache": true
+              }
+            ],
+            "field_order": ["input_value"],
+            "beta": false,
+            "edited": false
+          }
+        }
+      },
+      {
+        "id": "agent-context-analyzer",
+        "type": "OpenAIModel",
+        "position": {
+          "x": 600,
+          "y": 250
+        },
+        "data": {
+          "type": "OpenAIModel",
+          "node": {
+            "template": {
+              "api_key": {
+                "type": "str",
+                "required": false,
+                "placeholder": "",
+                "list": false,
+                "show": true,
+                "multiline": false,
+                "value": "",
+                "fileTypes": [],
+                "file_path": "",
+                "password": true,
+                "name": "api_key",
+                "display_name": "OpenAI API Key",
+                "advanced": false,
+                "dynamic": false,
+                "info": "",
+                "title_case": false
+              },
+              "input_value": {
+                "type": "str",
+                "required": true,
+                "placeholder": "",
+                "list": false,
+                "show": true,
+                "multiline": true,
+                "value": "Analyseer de volgende klantcontext:\n\n**Context:** {customer_context}\n**Problematiek:** {problem_description}\n**Industry:** {industry}\n\nGeef een grondige analyse van de situatie.",
+                "fileTypes": [],
+                "file_path": "",
+                "password": false,
+                "name": "input_value",
+                "display_name": "Input",
+                "advanced": false,
+                "dynamic": false,
+                "info": "",
+                "title_case": false
+              },
+              "max_tokens": {
+                "type": "int",
+                "required": false,
+                "placeholder": "",
+                "list": false,
+                "show": true,
+                "multiline": false,
+                "value": 2000,
+                "fileTypes": [],
+                "file_path": "",
+                "password": false,
+                "name": "max_tokens",
+                "display_name": "Max Tokens",
+                "advanced": false,
+                "dynamic": false,
+                "info": "",
+                "title_case": false
+              },
+              "model_name": {
+                "type": "str",
+                "required": false,
+                "placeholder": "",
+                "list": true,
+                "show": true,
+                "multiline": false,
+                "value": "gpt-4",
+                "fileTypes": [],
+                "file_path": "",
+                "password": false,
+                "name": "model_name",
+                "display_name": "Model Name",
+                "advanced": false,
+                "dynamic": false,
+                "info": "",
+                "title_case": false,
+                "options": ["gpt-4", "gpt-4-turbo-preview", "gpt-3.5-turbo"]
+              },
+              "system_message": {
+                "type": "str",
+                "required": false,
+                "placeholder": "",
+                "list": false,
+                "show": true,
+                "multiline": true,
+                "value": "Je bent een expert consultant die klantcontexten analyseert. Jouw taak is om:\n1. De belangrijkste behoeften en doelen van de klant te identificeren\n2. Uitdagingen en beperkingen te herkennen\n3. Kritische succesfactoren te bepalen\n4. Het volwassenheidsniveau van de organisatie in te schatten\n\nGeef een gestructureerde analyse in het volgende format:\n\n**Klantbehoeften:**\n- [lijst van behoeften]\n\n**Uitdagingen:**\n- [lijst van uitdagingen]\n\n**Succesfactoren:**\n- [lijst van factoren]\n\n**Organisatie Volwassenheid:**\n- [beoordeling]",
+                "fileTypes": [],
+                "file_path": "",
+                "password": false,
+                "name": "system_message",
+                "display_name": "System Message",
+                "advanced": false,
+                "dynamic": false,
+                "info": "",
+                "title_case": false
+              },
+              "temperature": {
+                "type": "float",
+                "required": false,
+                "placeholder": "",
+                "list": false,
+                "show": true,
+                "multiline": false,
+                "value": 0.7,
+                "fileTypes": [],
+                "file_path": "",
+                "password": false,
+                "name": "temperature",
+                "display_name": "Temperature",
+                "advanced": false,
+                "dynamic": false,
+                "info": "",
+                "title_case": false
+              }
+            },
+            "description": "Agent die klantcontext analyseert",
+            "base_classes": ["Message"],
+            "display_name": "Context Analyzer Agent",
+            "documentation": "",
+            "custom_fields": {},
+            "output_types": [],
+            "pinned": false,
+            "conditional_paths": [],
+            "frozen": false,
+            "outputs": [
+              {
+                "types": ["Message"],
+                "selected": "Message",
+                "name": "text",
+                "display_name": "Text",
+                "method": "text_response",
+                "value": "__UNDEFINED__",
+                "cache": true
+              }
+            ],
+            "field_order": ["model_name", "api_key", "system_message", "input_value", "temperature", "max_tokens"],
+            "beta": false,
+            "edited": false
+          }
+        }
+      },
+      {
+        "id": "agent-service-recommender",
+        "type": "OpenAIModel",
+        "position": {
+          "x": 1100,
+          "y": 100
+        },
+        "data": {
+          "type": "OpenAIModel",
+          "node": {
+            "template": {
+              "api_key": {
+                "type": "str",
+                "required": false,
+                "placeholder": "",
+                "list": false,
+                "show": true,
+                "multiline": false,
+                "value": "",
+                "fileTypes": [],
+                "file_path": "",
+                "password": true,
+                "name": "api_key",
+                "display_name": "OpenAI API Key",
+                "advanced": false,
+                "dynamic": false,
+                "info": "",
+                "title_case": false
+              },
+              "input_value": {
+                "type": "str",
+                "required": true,
+                "placeholder": "",
+                "list": false,
+                "show": true,
+                "multiline": true,
+                "value": "Op basis van de volgende context analyse:\n\n{context_analysis}\n\nBeveel de meest relevante services aan voor deze klant. Geef een top 5 met gedetailleerde uitleg.",
+                "fileTypes": [],
+                "file_path": "",
+                "password": false,
+                "name": "input_value",
+                "display_name": "Input",
+                "advanced": false,
+                "dynamic": false,
+                "info": "",
+                "title_case": false
+              },
+              "max_tokens": {
+                "type": "int",
+                "required": false,
+                "placeholder": "",
+                "list": false,
+                "show": true,
+                "multiline": false,
+                "value": 2000,
+                "fileTypes": [],
+                "file_path": "",
+                "password": false,
+                "name": "max_tokens",
+                "display_name": "Max Tokens",
+                "advanced": false,
+                "dynamic": false,
+                "info": "",
+                "title_case": false
+              },
+              "model_name": {
+                "type": "str",
+                "required": false,
+                "placeholder": "",
+                "list": true,
+                "show": true,
+                "multiline": false,
+                "value": "gpt-4",
+                "fileTypes": [],
+                "file_path": "",
+                "password": false,
+                "name": "model_name",
+                "display_name": "Model Name",
+                "advanced": false,
+                "dynamic": false,
+                "info": "",
+                "title_case": false,
+                "options": ["gpt-4", "gpt-4-turbo-preview", "gpt-3.5-turbo"]
+              },
+              "system_message": {
+                "type": "str",
+                "required": false,
+                "placeholder": "",
+                "list": false,
+                "show": true,
+                "multiline": true,
+                "value": "Je bent een service recommendation expert. Op basis van klantanalyse beveel je relevante consultancy services aan.\n\nGebruikelijke service categorieën:\n- Digital Transformation\n- Cloud Migration & Modernization\n- Data & Analytics\n- AI/ML Implementation\n- DevOps & Automation\n- Cybersecurity\n- Application Development\n- Infrastructure Optimization\n- Change Management\n- Organizational Design\n\nVoor elke aanbeveling geef je:\n1. Service naam\n2. Relevantie score (1-10)\n3. Rationale\n4. Verwachte impact\n5. Geschatte tijdlijn",
+                "fileTypes": [],
+                "file_path": "",
+                "password": false,
+                "name": "system_message",
+                "display_name": "System Message",
+                "advanced": false,
+                "dynamic": false,
+                "info": "",
+                "title_case": false
+              },
+              "temperature": {
+                "type": "float",
+                "required": false,
+                "placeholder": "",
+                "list": false,
+                "show": true,
+                "multiline": false,
+                "value": 0.6,
+                "fileTypes": [],
+                "file_path": "",
+                "password": false,
+                "name": "temperature",
+                "display_name": "Temperature",
+                "advanced": false,
+                "dynamic": false,
+                "info": "",
+                "title_case": false
+              }
+            },
+            "description": "Agent die relevante consultancy services aanbeveelt",
+            "base_classes": ["Message"],
+            "display_name": "Service Recommender Agent",
+            "documentation": "",
+            "custom_fields": {},
+            "output_types": [],
+            "pinned": false,
+            "conditional_paths": [],
+            "frozen": false,
+            "outputs": [
+              {
+                "types": ["Message"],
+                "selected": "Message",
+                "name": "text",
+                "display_name": "Text",
+                "method": "text_response",
+                "value": "__UNDEFINED__",
+                "cache": true
+              }
+            ],
+            "field_order": ["model_name", "api_key", "system_message", "input_value", "temperature", "max_tokens"],
+            "beta": false,
+            "edited": false
+          }
+        }
+      },
+      {
+        "id": "agent-best-practices",
+        "type": "OpenAIModel",
+        "position": {
+          "x": 1100,
+          "y": 400
+        },
+        "data": {
+          "type": "OpenAIModel",
+          "node": {
+            "template": {
+              "api_key": {
+                "type": "str",
+                "required": false,
+                "placeholder": "",
+                "list": false,
+                "show": true,
+                "multiline": false,
+                "value": "",
+                "fileTypes": [],
+                "file_path": "",
+                "password": true,
+                "name": "api_key",
+                "display_name": "OpenAI API Key",
+                "advanced": false,
+                "dynamic": false,
+                "info": "",
+                "title_case": false
+              },
+              "input_value": {
+                "type": "str",
+                "required": true,
+                "placeholder": "",
+                "list": false,
+                "show": true,
+                "multiline": true,
+                "value": "Gegeven deze analyse:\n\n{context_analysis}\n\nEn deze aanbevolen services:\n\n{recommended_services}\n\nWelke best practices, frameworks en methodologieën zijn het meest geschikt? Geef concrete aanbevelingen met implementatie overwegingen.",
+                "fileTypes": [],
+                "file_path": "",
+                "password": false,
+                "name": "input_value",
+                "display_name": "Input",
+                "advanced": false,
+                "dynamic": false,
+                "info": "",
+                "title_case": false
+              },
+              "max_tokens": {
+                "type": "int",
+                "required": false,
+                "placeholder": "",
+                "list": false,
+                "show": true,
+                "multiline": false,
+                "value": 2000,
+                "fileTypes": [],
+                "file_path": "",
+                "password": false,
+                "name": "max_tokens",
+                "display_name": "Max Tokens",
+                "advanced": false,
+                "dynamic": false,
+                "info": "",
+                "title_case": false
+              },
+              "model_name": {
+                "type": "str",
+                "required": false,
+                "placeholder": "",
+                "list": true,
+                "show": true,
+                "multiline": false,
+                "value": "gpt-4",
+                "fileTypes": [],
+                "file_path": "",
+                "password": false,
+                "name": "model_name",
+                "display_name": "Model Name",
+                "advanced": false,
+                "dynamic": false,
+                "info": "",
+                "title_case": false,
+                "options": ["gpt-4", "gpt-4-turbo-preview", "gpt-3.5-turbo"]
+              },
+              "system_message": {
+                "type": "str",
+                "required": false,
+                "placeholder": "",
+                "list": false,
+                "show": true,
+                "multiline": true,
+                "value": "Je bent een expert in industry best practices en methodologieën. Je kennis omvat:\n- Agile/Scrum/SAFe\n- ITIL/ITSM\n- DevOps/SRE practices\n- Data Governance frameworks\n- Cloud adoption frameworks (AWS WAF, Azure CAF, Google Cloud Framework)\n- Security frameworks (ISO 27001, NIST, CIS)\n- Architecture patterns (Microservices, Event-driven, etc.)\n\nJe adviseert welke best practices en frameworks het meest relevant zijn voor de specifieke klant situatie.",
+                "fileTypes": [],
+                "file_path": "",
+                "password": false,
+                "name": "system_message",
+                "display_name": "System Message",
+                "advanced": false,
+                "dynamic": false,
+                "info": "",
+                "title_case": false
+              },
+              "temperature": {
+                "type": "float",
+                "required": false,
+                "placeholder": "",
+                "list": false,
+                "show": true,
+                "multiline": false,
+                "value": 0.7,
+                "fileTypes": [],
+                "file_path": "",
+                "password": false,
+                "name": "temperature",
+                "display_name": "Temperature",
+                "advanced": false,
+                "dynamic": false,
+                "info": "",
+                "title_case": false
+              }
+            },
+            "description": "Agent die best practices en frameworks aanbeveelt",
+            "base_classes": ["Message"],
+            "display_name": "Best Practices Agent",
+            "documentation": "",
+            "custom_fields": {},
+            "output_types": [],
+            "pinned": false,
+            "conditional_paths": [],
+            "frozen": false,
+            "outputs": [
+              {
+                "types": ["Message"],
+                "selected": "Message",
+                "name": "text",
+                "display_name": "Text",
+                "method": "text_response",
+                "value": "__UNDEFINED__",
+                "cache": true
+              }
+            ],
+            "field_order": ["model_name", "api_key", "system_message", "input_value", "temperature", "max_tokens"],
+            "beta": false,
+            "edited": false
+          }
+        }
+      },
+      {
+        "id": "agent-knowledge-base",
+        "type": "OpenAIModel",
+        "position": {
+          "x": 1100,
+          "y": 700
+        },
+        "data": {
+          "type": "OpenAIModel",
+          "node": {
+            "template": {
+              "api_key": {
+                "type": "str",
+                "required": false,
+                "placeholder": "",
+                "list": false,
+                "show": true,
+                "multiline": false,
+                "value": "",
+                "fileTypes": [],
+                "file_path": "",
+                "password": true,
+                "name": "api_key",
+                "display_name": "OpenAI API Key",
+                "advanced": false,
+                "dynamic": false,
+                "info": "",
+                "title_case": false
+              },
+              "input_value": {
+                "type": "str",
+                "required": true,
+                "placeholder": "",
+                "list": false,
+                "show": true,
+                "multiline": true,
+                "value": "Voor deze klant situatie:\n\n**Context Analyse:**\n{context_analysis}\n\n**Aanbevolen Services:**\n{recommended_services}\n\nDeel relevante ervaringskennis:\n1. Vergelijkbare case studies\n2. Belangrijke lessons learned\n3. Potentiële uitdagingen en oplossingen\n4. Success factors uit eerdere projecten",
+                "fileTypes": [],
+                "file_path": "",
+                "password": false,
+                "name": "input_value",
+                "display_name": "Input",
+                "advanced": false,
+                "dynamic": false,
+                "info": "",
+                "title_case": false
+              },
+              "max_tokens": {
+                "type": "int",
+                "required": false,
+                "placeholder": "",
+                "list": false,
+                "show": true,
+                "multiline": false,
+                "value": 2000,
+                "fileTypes": [],
+                "file_path": "",
+                "password": false,
+                "name": "max_tokens",
+                "display_name": "Max Tokens",
+                "advanced": false,
+                "dynamic": false,
+                "info": "",
+                "title_case": false
+              },
+              "model_name": {
+                "type": "str",
+                "required": false,
+                "placeholder": "",
+                "list": true,
+                "show": true,
+                "multiline": false,
+                "value": "gpt-4",
+                "fileTypes": [],
+                "file_path": "",
+                "password": false,
+                "name": "model_name",
+                "display_name": "Model Name",
+                "advanced": false,
+                "dynamic": false,
+                "info": "",
+                "title_case": false,
+                "options": ["gpt-4", "gpt-4-turbo-preview", "gpt-3.5-turbo"]
+              },
+              "system_message": {
+                "type": "str",
+                "required": false,
+                "placeholder": "",
+                "list": false,
+                "show": true,
+                "multiline": true,
+                "value": "Je bent een knowledge management expert met toegang tot jaren aan consultancy ervaring. Je deelt:\n- Relevante case studies\n- Lessons learned van vergelijkbare projecten\n- Common pitfalls en hoe ze te vermijden\n- Success patterns\n- Industry-specifieke inzichten\n\nJe geeft praktische, actionable kennis die consultants direct kunnen gebruiken.",
+                "fileTypes": [],
+                "file_path": "",
+                "password": false,
+                "name": "system_message",
+                "display_name": "System Message",
+                "advanced": false,
+                "dynamic": false,
+                "info": "",
+                "title_case": false
+              },
+              "temperature": {
+                "type": "float",
+                "required": false,
+                "placeholder": "",
+                "list": false,
+                "show": true,
+                "multiline": false,
+                "value": 0.8,
+                "fileTypes": [],
+                "file_path": "",
+                "password": false,
+                "name": "temperature",
+                "display_name": "Temperature",
+                "advanced": false,
+                "dynamic": false,
+                "info": "",
+                "title_case": false
+              }
+            },
+            "description": "Agent die ervaringskennis en case studies deelt",
+            "base_classes": ["Message"],
+            "display_name": "Knowledge & Experience Agent",
+            "documentation": "",
+            "custom_fields": {},
+            "output_types": [],
+            "pinned": false,
+            "conditional_paths": [],
+            "frozen": false,
+            "outputs": [
+              {
+                "types": ["Message"],
+                "selected": "Message",
+                "name": "text",
+                "display_name": "Text",
+                "method": "text_response",
+                "value": "__UNDEFINED__",
+                "cache": true
+              }
+            ],
+            "field_order": ["model_name", "api_key", "system_message", "input_value", "temperature", "max_tokens"],
+            "beta": false,
+            "edited": false
+          }
+        }
+      },
+      {
+        "id": "agent-proposal-synthesizer",
+        "type": "OpenAIModel",
+        "position": {
+          "x": 1600,
+          "y": 350
+        },
+        "data": {
+          "type": "OpenAIModel",
+          "node": {
+            "template": {
+              "api_key": {
+                "type": "str",
+                "required": false,
+                "placeholder": "",
+                "list": false,
+                "show": true,
+                "multiline": false,
+                "value": "",
+                "fileTypes": [],
+                "file_path": "",
+                "password": true,
+                "name": "api_key",
+                "display_name": "OpenAI API Key",
+                "advanced": false,
+                "dynamic": false,
+                "info": "",
+                "title_case": false
+              },
+              "input_value": {
+                "type": "str",
+                "required": true,
+                "placeholder": "",
+                "list": false,
+                "show": true,
+                "multiline": true,
+                "value": "Genereer een compleet klantvoorstel op basis van alle verzamelde informatie:\n\n**KLANT CONTEXT:**\n- Context: {customer_context}\n- Problematiek: {problem_description}\n- Industry: {industry}\n\n**CONTEXT ANALYSE:**\n{context_analysis}\n\n**AANBEVOLEN SERVICES:**\n{recommended_services}\n\n**BEST PRACTICES:**\n{best_practices}\n\n**ERVARINGSKENNIS:**\n{knowledge}\n\nCreëer een gestructureerd, professioneel voorstel dat de consultant direct kan gebruiken of verder kan aanpassen.",
+                "fileTypes": [],
+                "file_path": "",
+                "password": false,
+                "name": "input_value",
+                "display_name": "Input",
+                "advanced": false,
+                "dynamic": false,
+                "info": "",
+                "title_case": false
+              },
+              "max_tokens": {
+                "type": "int",
+                "required": false,
+                "placeholder": "",
+                "list": false,
+                "show": true,
+                "multiline": false,
+                "value": 4000,
+                "fileTypes": [],
+                "file_path": "",
+                "password": false,
+                "name": "max_tokens",
+                "display_name": "Max Tokens",
+                "advanced": false,
+                "dynamic": false,
+                "info": "",
+                "title_case": false
+              },
+              "model_name": {
+                "type": "str",
+                "required": false,
+                "placeholder": "",
+                "list": true,
+                "show": true,
+                "multiline": false,
+                "value": "gpt-4",
+                "fileTypes": [],
+                "file_path": "",
+                "password": false,
+                "name": "model_name",
+                "display_name": "Model Name",
+                "advanced": false,
+                "dynamic": false,
+                "info": "",
+                "title_case": false,
+                "options": ["gpt-4", "gpt-4-turbo-preview", "gpt-3.5-turbo"]
+              },
+              "system_message": {
+                "type": "str",
+                "required": false,
+                "placeholder": "",
+                "list": false,
+                "show": true,
+                "multiline": true,
+                "value": "Je bent een expert proposal writer die alle input van andere agents combineert tot een coherent, overtuigend klantvoorstel.\n\nEen goed voorstel bevat:\n1. Executive Summary\n2. Situatie Analyse\n3. Aanbevolen Aanpak\n4. Services & Deliverables\n5. Best Practices & Methodologie\n6. Risk Mitigation\n7. Success Metrics\n8. Timeline & Milestones\n9. Next Steps\n\nSchrijf professioneel, klantgericht en actionable.",
+                "fileTypes": [],
+                "file_path": "",
+                "password": false,
+                "name": "system_message",
+                "display_name": "System Message",
+                "advanced": false,
+                "dynamic": false,
+                "info": "",
+                "title_case": false
+              },
+              "temperature": {
+                "type": "float",
+                "required": false,
+                "placeholder": "",
+                "list": false,
+                "show": true,
+                "multiline": false,
+                "value": 0.7,
+                "fileTypes": [],
+                "file_path": "",
+                "password": false,
+                "name": "temperature",
+                "display_name": "Temperature",
+                "advanced": false,
+                "dynamic": false,
+                "info": "",
+                "title_case": false
+              }
+            },
+            "description": "Agent die alle outputs combineert tot compleet voorstel",
+            "base_classes": ["Message"],
+            "display_name": "Proposal Synthesizer Agent",
+            "documentation": "",
+            "custom_fields": {},
+            "output_types": [],
+            "pinned": false,
+            "conditional_paths": [],
+            "frozen": false,
+            "outputs": [
+              {
+                "types": ["Message"],
+                "selected": "Message",
+                "name": "text",
+                "display_name": "Text",
+                "method": "text_response",
+                "value": "__UNDEFINED__",
+                "cache": true
+              }
+            ],
+            "field_order": ["model_name", "api_key", "system_message", "input_value", "temperature", "max_tokens"],
+            "beta": false,
+            "edited": false
+          }
+        }
+      },
+      {
+        "id": "output-final-proposal",
+        "type": "TextOutput",
+        "position": {
+          "x": 2100,
+          "y": 250
+        },
+        "data": {
+          "type": "TextOutput",
+          "node": {
+            "template": {
+              "input_value": {
+                "type": "str",
+                "required": true,
+                "placeholder": "",
+                "list": false,
+                "show": true,
+                "multiline": true,
+                "value": "",
+                "fileTypes": [],
+                "file_path": "",
+                "password": false,
+                "name": "input_value",
+                "display_name": "Text",
+                "advanced": false,
+                "dynamic": false,
+                "info": "",
+                "title_case": false
+              }
+            },
+            "description": "Compleet klantvoorstel",
+            "base_classes": ["Message"],
+            "display_name": "Final Proposal",
+            "documentation": "",
+            "custom_fields": {},
+            "output_types": [],
+            "pinned": false,
+            "conditional_paths": [],
+            "frozen": false,
+            "outputs": [
+              {
+                "types": ["Message"],
+                "selected": "Message",
+                "name": "text",
+                "display_name": "Text",
+                "method": "text_response",
+                "value": "__UNDEFINED__",
+                "cache": true
+              }
+            ],
+            "field_order": ["input_value"],
+            "beta": false,
+            "edited": false
+          }
+        }
+      },
+      {
+        "id": "output-services",
+        "type": "TextOutput",
+        "position": {
+          "x": 2100,
+          "y": 100
+        },
+        "data": {
+          "type": "TextOutput",
+          "node": {
+            "template": {
+              "input_value": {
+                "type": "str",
+                "required": true,
+                "placeholder": "",
+                "list": false,
+                "show": true,
+                "multiline": true,
+                "value": "",
+                "fileTypes": [],
+                "file_path": "",
+                "password": false,
+                "name": "input_value",
+                "display_name": "Text",
+                "advanced": false,
+                "dynamic": false,
+                "info": "",
+                "title_case": false
+              }
+            },
+            "description": "Aanbevolen services met scores",
+            "base_classes": ["Message"],
+            "display_name": "Recommended Services",
+            "documentation": "",
+            "custom_fields": {},
+            "output_types": [],
+            "pinned": false,
+            "conditional_paths": [],
+            "frozen": false,
+            "outputs": [
+              {
+                "types": ["Message"],
+                "selected": "Message",
+                "name": "text",
+                "display_name": "Text",
+                "method": "text_response",
+                "value": "__UNDEFINED__",
+                "cache": true
+              }
+            ],
+            "field_order": ["input_value"],
+            "beta": false,
+            "edited": false
+          }
+        }
+      },
+      {
+        "id": "output-best-practices",
+        "type": "TextOutput",
+        "position": {
+          "x": 2100,
+          "y": 400
+        },
+        "data": {
+          "type": "TextOutput",
+          "node": {
+            "template": {
+              "input_value": {
+                "type": "str",
+                "required": true,
+                "placeholder": "",
+                "list": false,
+                "show": true,
+                "multiline": true,
+                "value": "",
+                "fileTypes": [],
+                "file_path": "",
+                "password": false,
+                "name": "input_value",
+                "display_name": "Text",
+                "advanced": false,
+                "dynamic": false,
+                "info": "",
+                "title_case": false
+              }
+            },
+            "description": "Appliceerbare best practices en frameworks",
+            "base_classes": ["Message"],
+            "display_name": "Best Practices",
+            "documentation": "",
+            "custom_fields": {},
+            "output_types": [],
+            "pinned": false,
+            "conditional_paths": [],
+            "frozen": false,
+            "outputs": [
+              {
+                "types": ["Message"],
+                "selected": "Message",
+                "name": "text",
+                "display_name": "Text",
+                "method": "text_response",
+                "value": "__UNDEFINED__",
+                "cache": true
+              }
+            ],
+            "field_order": ["input_value"],
+            "beta": false,
+            "edited": false
+          }
+        }
+      },
+      {
+        "id": "output-knowledge",
+        "type": "TextOutput",
+        "position": {
+          "x": 2100,
+          "y": 550
+        },
+        "data": {
+          "type": "TextOutput",
+          "node": {
+            "template": {
+              "input_value": {
+                "type": "str",
+                "required": true,
+                "placeholder": "",
+                "list": false,
+                "show": true,
+                "multiline": true,
+                "value": "",
+                "fileTypes": [],
+                "file_path": "",
+                "password": false,
+                "name": "input_value",
+                "display_name": "Text",
+                "advanced": false,
+                "dynamic": false,
+                "info": "",
+                "title_case": false
+              }
+            },
+            "description": "Relevante case studies en lessons learned",
+            "base_classes": ["Message"],
+            "display_name": "Knowledge & Experience",
+            "documentation": "",
+            "custom_fields": {},
+            "output_types": [],
+            "pinned": false,
+            "conditional_paths": [],
+            "frozen": false,
+            "outputs": [
+              {
+                "types": ["Message"],
+                "selected": "Message",
+                "name": "text",
+                "display_name": "Text",
+                "method": "text_response",
+                "value": "__UNDEFINED__",
+                "cache": true
+              }
+            ],
+            "field_order": ["input_value"],
+            "beta": false,
+            "edited": false
+          }
+        }
+      }
+    ],
+    "edges": [
+      {
+        "id": "edge-1",
+        "source": "text-input-customer-context",
+        "target": "agent-context-analyzer",
+        "sourceHandle": "text",
+        "targetHandle": "customer_context",
+        "data": {}
+      },
+      {
+        "id": "edge-2",
+        "source": "text-input-problem-description",
+        "target": "agent-context-analyzer",
+        "sourceHandle": "text",
+        "targetHandle": "problem_description",
+        "data": {}
+      },
+      {
+        "id": "edge-3",
+        "source": "text-input-industry",
+        "target": "agent-context-analyzer",
+        "sourceHandle": "text",
+        "targetHandle": "industry",
+        "data": {}
+      },
+      {
+        "id": "edge-4",
+        "source": "agent-context-analyzer",
+        "target": "agent-service-recommender",
+        "sourceHandle": "text",
+        "targetHandle": "context_analysis",
+        "data": {}
+      },
+      {
+        "id": "edge-5",
+        "source": "agent-context-analyzer",
+        "target": "agent-best-practices",
+        "sourceHandle": "text",
+        "targetHandle": "context_analysis",
+        "data": {}
+      },
+      {
+        "id": "edge-6",
+        "source": "agent-service-recommender",
+        "target": "agent-best-practices",
+        "sourceHandle": "text",
+        "targetHandle": "recommended_services",
+        "data": {}
+      },
+      {
+        "id": "edge-7",
+        "source": "agent-context-analyzer",
+        "target": "agent-knowledge-base",
+        "sourceHandle": "text",
+        "targetHandle": "context_analysis",
+        "data": {}
+      },
+      {
+        "id": "edge-8",
+        "source": "agent-service-recommender",
+        "target": "agent-knowledge-base",
+        "sourceHandle": "text",
+        "targetHandle": "recommended_services",
+        "data": {}
+      },
+      {
+        "id": "edge-9",
+        "source": "text-input-customer-context",
+        "target": "agent-proposal-synthesizer",
+        "sourceHandle": "text",
+        "targetHandle": "customer_context",
+        "data": {}
+      },
+      {
+        "id": "edge-10",
+        "source": "text-input-problem-description",
+        "target": "agent-proposal-synthesizer",
+        "sourceHandle": "text",
+        "targetHandle": "problem_description",
+        "data": {}
+      },
+      {
+        "id": "edge-11",
+        "source": "text-input-industry",
+        "target": "agent-proposal-synthesizer",
+        "sourceHandle": "text",
+        "targetHandle": "industry",
+        "data": {}
+      },
+      {
+        "id": "edge-12",
+        "source": "agent-context-analyzer",
+        "target": "agent-proposal-synthesizer",
+        "sourceHandle": "text",
+        "targetHandle": "context_analysis",
+        "data": {}
+      },
+      {
+        "id": "edge-13",
+        "source": "agent-service-recommender",
+        "target": "agent-proposal-synthesizer",
+        "sourceHandle": "text",
+        "targetHandle": "recommended_services",
+        "data": {}
+      },
+      {
+        "id": "edge-14",
+        "source": "agent-best-practices",
+        "target": "agent-proposal-synthesizer",
+        "sourceHandle": "text",
+        "targetHandle": "best_practices",
+        "data": {}
+      },
+      {
+        "id": "edge-15",
+        "source": "agent-knowledge-base",
+        "target": "agent-proposal-synthesizer",
+        "sourceHandle": "text",
+        "targetHandle": "knowledge",
+        "data": {}
+      },
+      {
+        "id": "edge-16",
+        "source": "agent-proposal-synthesizer",
+        "target": "output-final-proposal",
+        "sourceHandle": "text",
+        "targetHandle": "input_value",
+        "data": {}
+      },
+      {
+        "id": "edge-17",
+        "source": "agent-service-recommender",
+        "target": "output-services",
+        "sourceHandle": "text",
+        "targetHandle": "input_value",
+        "data": {}
+      },
+      {
+        "id": "edge-18",
+        "source": "agent-best-practices",
+        "target": "output-best-practices",
+        "sourceHandle": "text",
+        "targetHandle": "input_value",
+        "data": {}
+      },
+      {
+        "id": "edge-19",
+        "source": "agent-knowledge-base",
+        "target": "output-knowledge",
+        "sourceHandle": "text",
+        "targetHandle": "input_value",
+        "data": {}
+      }
+    ],
+    "viewport": {
+      "x": 0,
+      "y": 0,
+      "zoom": 0.7
+    }
+  }
+}

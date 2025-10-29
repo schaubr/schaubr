@@ -1,0 +1,145 @@
+# Voorbeeld Input voor AI Context Service Recommender
+# Kopieer en pas deze voorbeelden aan voor je eigen klant situaties
+
+# Voorbeeld 1: Financial Services - Digital Transformation
+example_1:
+  customerContext: |
+    Een middelgrote bank met 500 medewerkers die nog grotendeels
+    on-premise infrastructure heeft. Ze hebben een legacy monolithische
+    applicatie voor hun core banking, gebouwd in Java 8. Het IT team bestaat
+    uit 20 developers, 5 ops engineers, en 3 architects. Ze zijn vooral
+    waterfall gewend en hebben beperkte cloud ervaring. Hun data zit verspreid
+    over meerdere systemen zonder centrale governance.
+
+  problemDescription: |
+    De bank wil digitaal transformeren om beter te kunnen concurreren
+    met fintechs. Ze hebben last van lange time-to-market voor nieuwe
+    features (6-12 maanden), hoge operational costs (€2M/jaar voor
+    infrastructure), en beperkte schaalbaarheid. Ook willen ze AI gebruiken
+    voor fraud detection en customer insights, maar missen ze de data
+    foundation hiervoor. Compliance (GDPR, PSD2) is een belangrijke
+    constraint. Budget beschikbaar: €3-5M voor eerste fase.
+
+  industry: "Financial Services"
+
+# Voorbeeld 2: Retail - E-commerce Platform Modernization
+example_2:
+  customerContext: |
+    Een retail keten met 150 winkels en groeiende online verkoop (30% van
+    totale omzet). Hun e-commerce platform is 5 jaar oud, gebouwd op
+    Magento, en heeft performance problemen tijdens piekperiodes (Black
+    Friday, kerst). Team van 15 developers, mix van interne en external
+    contractors. Huidige cloud setup is een lift-and-shift naar AWS zonder
+    cloud-native architectuur.
+
+  problemDescription: |
+    Website heeft regelmatig downtime tijdens sales events, wat resulteert
+    in gemiste omzet (€500K+ per incident). De customer experience is
+    verouderd - geen personalisatie, langzame checkout, beperkte mobile
+    UX. Ze willen omnichannel capabilities (buy online pickup in store,
+    unified inventory) maar het platform ondersteunt dit niet. Ook willen
+    ze beter inzicht in customer behavior en voorraad optimalisatie.
+
+  industry: "Retail"
+
+# Voorbeeld 3: Healthcare - Legacy System Modernization
+example_3:
+  customerContext: |
+    Een zorginstelling met 3 ziekenhuizen en 2000 medewerkers. Ze gebruiken
+    een 15 jaar oud patient management systeem dat on-premise draait. Het
+    systeem is kritisch maar moeilijk te onderhouden (originele vendor bestaat
+    niet meer). Klein IT team van 8 mensen die vooral support doen. Zeer
+    beperkte API capabilities, veel handmatige processen. Hoge compliance
+    eisen (AVG, NEN7510, Wabvpz).
+
+  problemDescription: |
+    Het legacy systeem wordt een risico - geen updates meer, security concerns,
+    kan niet integreren met moderne health tech (telehealth, wearables,
+    patient portals). Medewerkers zijn gefrustreerd door inefficiënte workflows.
+    Ze willen moderniseren maar zijn bezorgd over business continuity tijdens
+    transitie. Ook willen ze data analytics voor betere patient outcomes en
+    operational efficiency. Zero downtime is cruciaal.
+
+  industry: "Healthcare"
+
+# Voorbeeld 4: Manufacturing - IoT & Predictive Maintenance
+example_4:
+  customerContext: |
+    Een productie bedrijf met 5 fabrieken wereldwijd. Ze hebben moderne
+    machines maar beperkte digitalisering van manufacturing processes.
+    Geen real-time visibility in productie metrics. IT/OT scheiding met
+    weinig samenwerking. Team heeft OT expertise maar beperkte IT/cloud
+    kennis. ERP systeem (SAP) is leidend maar staat los van shop floor.
+
+  problemDescription: |
+    Onverwachte machine downtime kost €100K+ per dag. Onderhoud is reactief
+    in plaats van predictief. Geen inzicht in overall equipment effectiveness
+    (OEE) per fabriek. Ze willen IoT sensors implementeren voor machine data,
+    predictive maintenance met ML, en real-time dashboards voor operations.
+    Ook supply chain visibility en quality tracking. Bestaande OT security
+    is een concern bij cloud connectivity.
+
+  industry: "Manufacturing"
+
+# Voorbeeld 5: Government - Citizen Service Platform
+example_5:
+  customerContext: |
+    Een gemeentebestuur met 100.000 inwoners. Ze hebben meerdere legacy
+    systemen voor verschillende diensten (burgerzaken, vergunningen, WMO,
+    participatie). Elk systeem heeft eigen database en geen integratie.
+    IT wordt deels uitbesteed aan verschillende leveranciers. Team van
+    12 mensen, beperkte development capaciteit. Veel papieren processen.
+
+  problemDescription: |
+    Burgers moeten voor verschillende diensten steeds opnieuw informatie
+    aanleveren. Geen self-service mogelijkheden, alles via loket of telefoon.
+    Inefficiënte backoffice processen, veel handmatig werk. Ze willen een
+    unified citizen portal waar burgers alles digitaal kunnen regelen,
+    met hergebruik van data tussen diensten. Ook casebeheer voor complexe
+    aanvragen. Privacy (AVG) en toegankelijkheid (WCAG) zijn hard requirements.
+    Beperkt budget en IT capaciteit.
+
+  industry: "Government/Public Sector"
+
+# Voorbeeld 6: Telecom - Customer Experience Transformation
+example_6:
+  customerContext: |
+    Een telecom provider met 2M klanten en hoge churn rate (15%/jaar).
+    Legacy BSS/OSS systemen (billing, customer management, provisioning)
+    die niet goed samenwerken. Customer service team van 200 agents die
+    werken met 10+ verschillende tools. NPS score is laag (20). Recent
+    verloren tegen competitors door trage service activatie (2-3 weken).
+
+  problemDescription: |
+    Klanten zijn ontevreden over lange wachttijden, trage service activatie,
+    onjuiste facturen, en gebrek aan self-service. Agents kunnen niet snel
+    customer issues oplossen door slechte system integratie. Ze willen
+    360° customer view, AI-powered customer service (chatbots, sentiment
+    analysis), geautomatiseerde service provisioning, en proactieve issue
+    resolution. Ook real-time network quality monitoring met customer impact
+    analysis.
+
+  industry: "Telecommunications"
+
+# Template voor nieuwe inputs
+template:
+  customerContext: |
+    [Beschrijf de klant organisatie:]
+    - Grootte en structuur
+    - Huidige technologie landschap
+    - Team samenstelling en vaardigheden
+    - Belangrijke systemen en tools
+    - Organisatie cultuur (agile/waterfall)
+    - Cloud maturity level
+    - Data landscape
+
+  problemDescription: |
+    [Beschrijf de uitdaging:]
+    - Concrete pijnpunten met impact (tijd/geld)
+    - Gewenste outcome en doelen
+    - Constraints (budget, tijd, compliance)
+    - Success criteria
+    - Stakeholder verwachtingen
+    - Risico's en concerns
+
+  industry: "[Sector naam]"
