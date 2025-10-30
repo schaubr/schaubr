@@ -1,426 +1,643 @@
 {
   "name": "AI Service Recommendation Flow",
   "description": "Een AI-gestuurd systeem dat automatisch relevante services, best practices en ervaringskennis aanreikt op basis van klantcontext en problematiek",
-  "version": "1.0.0",
-  "nodes": [
-    {
-      "id": "customer_input",
-      "type": "TextInput",
-      "position": {
-        "x": 100,
-        "y": 300
+  "folder_name": "",
+  "data": {
+    "nodes": [
+      {
+        "id": "customer_input",
+        "type": "ChatInput",
+        "position": {
+          "x": 100,
+          "y": 300
+        },
+        "data": {
+          "node": {
+            "template": {
+              "input_value": {
+                "type": "str",
+                "required": true,
+                "placeholder": "Beschrijf de klantcontext: industrie, bedrijfsgrootte, huidige uitdagingen, doelen...",
+                "multiline": true,
+                "value": "",
+                "name": "input_value"
+              }
+            },
+            "description": "Input voor klantcontext",
+            "base_classes": ["Message"],
+            "display_name": "Customer Context Input"
+          }
+        }
       },
-      "data": {
-        "name": "Customer Context Input",
-        "description": "Input voor klantcontext, industrie, bedrijfsgrootte, en specifieke uitdagingen",
-        "template": {
-          "value": {
-            "type": "str",
-            "required": true,
-            "placeholder": "Beschrijf de klantcontext: industrie, bedrijfsgrootte, huidige uitdagingen, doelen...",
-            "multiline": true
+      {
+        "id": "problem_input",
+        "type": "ChatInput",
+        "position": {
+          "x": 100,
+          "y": 500
+        },
+        "data": {
+          "node": {
+            "template": {
+              "input_value": {
+                "type": "str",
+                "required": true,
+                "placeholder": "Beschrijf de specifieke problematiek en behoeften van de klant...",
+                "multiline": true,
+                "value": "",
+                "name": "input_value"
+              }
+            },
+            "description": "Specifieke problematiek en behoeften",
+            "base_classes": ["Message"],
+            "display_name": "Problem Description Input"
+          }
+        }
+      },
+      {
+        "id": "context_analysis_agent",
+        "type": "ChatAnthropic",
+        "position": {
+          "x": 400,
+          "y": 200
+        },
+        "data": {
+          "node": {
+            "template": {
+              "anthropic_api_key": {
+                "type": "str",
+                "required": true,
+                "value": "",
+                "name": "anthropic_api_key",
+                "display_name": "Anthropic API Key",
+                "password": true
+              },
+              "model_name": {
+                "type": "str",
+                "required": true,
+                "value": "claude-3-5-sonnet-20241022",
+                "name": "model_name",
+                "display_name": "Model Name"
+              },
+              "temperature": {
+                "type": "float",
+                "required": false,
+                "value": 0.3,
+                "name": "temperature"
+              },
+              "max_tokens": {
+                "type": "int",
+                "required": false,
+                "value": 2000,
+                "name": "max_tokens"
+              },
+              "system_message": {
+                "type": "str",
+                "required": false,
+                "value": "Je bent een expert consultant die klantcontexten analyseert. Je taak is om:\n1. Industrie en sector te identificeren\n2. Bedrijfsgrootte en maturiteit te bepalen\n3. Kernuitdagingen te extraheren\n4. Strategische doelen te identificeren\n5. Technische volwassenheid te beoordelen\n\nGeef een gestructureerde analyse in JSON formaat met de keys: industrie, bedrijfsgrootte, maturiteit, kernuitdagingen, strategische_doelen, technische_volwassenheid.",
+                "name": "system_message",
+                "display_name": "System Message",
+                "multiline": true
+              },
+              "input_value": {
+                "type": "str",
+                "required": true,
+                "name": "input_value"
+              }
+            },
+            "description": "Context Analysis Agent - Analyseert klantcontext",
+            "base_classes": ["BaseChatModel"],
+            "display_name": "Context Analysis Agent"
+          }
+        }
+      },
+      {
+        "id": "problem_analysis_agent",
+        "type": "ChatAnthropic",
+        "position": {
+          "x": 400,
+          "y": 450
+        },
+        "data": {
+          "node": {
+            "template": {
+              "anthropic_api_key": {
+                "type": "str",
+                "required": true,
+                "value": "",
+                "name": "anthropic_api_key",
+                "password": true
+              },
+              "model_name": {
+                "type": "str",
+                "value": "claude-3-5-sonnet-20241022",
+                "name": "model_name"
+              },
+              "temperature": {
+                "type": "float",
+                "value": 0.3,
+                "name": "temperature"
+              },
+              "max_tokens": {
+                "type": "int",
+                "value": 2000,
+                "name": "max_tokens"
+              },
+              "system_message": {
+                "type": "str",
+                "value": "Je bent een expert probleemanalyst. Analyseer de problematiek en identificeer:\n1. Kernproblemen (root causes)\n2. Symptomen vs onderliggende oorzaken\n3. Impact op business processen\n4. Urgentie en prioriteit\n5. Technische vs organisatorische aspecten\n6. Afhankelijkheden en complexiteit\n\nGeef een gestructureerde analyse in JSON formaat.",
+                "name": "system_message",
+                "multiline": true
+              },
+              "input_value": {
+                "type": "str",
+                "required": true,
+                "name": "input_value"
+              }
+            },
+            "description": "Problem Analysis Agent - Analyseert problematiek",
+            "base_classes": ["BaseChatModel"],
+            "display_name": "Problem Analysis Agent"
+          }
+        }
+      },
+      {
+        "id": "service_matcher_agent",
+        "type": "ChatAnthropic",
+        "position": {
+          "x": 750,
+          "y": 200
+        },
+        "data": {
+          "node": {
+            "template": {
+              "anthropic_api_key": {
+                "type": "str",
+                "required": true,
+                "value": "",
+                "name": "anthropic_api_key",
+                "password": true
+              },
+              "model_name": {
+                "type": "str",
+                "value": "claude-3-5-sonnet-20241022",
+                "name": "model_name"
+              },
+              "temperature": {
+                "type": "float",
+                "value": 0.4,
+                "name": "temperature"
+              },
+              "max_tokens": {
+                "type": "int",
+                "value": 3000,
+                "name": "max_tokens"
+              },
+              "system_message": {
+                "type": "str",
+                "value": "Je bent een service matching expert. Op basis van de klantcontext en problematiek, identificeer je:\n\n**Beschikbare Services:**\n- Cloud Migration & Modernization\n- DevOps & CI/CD Implementation\n- Data Analytics & AI/ML Solutions\n- Cybersecurity & Compliance\n- Application Development & Integration\n- Infrastructure Optimization\n- Digital Transformation Consulting\n- Agile & Process Optimization\n- Training & Change Management\n\nVoor elke relevante service, geef aan:\n1. Waarom deze service relevant is\n2. Verwachte impact en waarde\n3. Implementatie complexiteit\n4. Geschatte tijdlijn\n5. Prioriteit (hoog/medium/laag)\n\nGeef output in JSON formaat met key 'recommended_services' als array.",
+                "name": "system_message",
+                "multiline": true
+              },
+              "input_value": {
+                "type": "str",
+                "required": true,
+                "name": "input_value"
+              }
+            },
+            "description": "Service Matcher - Matcht services met behoeften",
+            "base_classes": ["BaseChatModel"],
+            "display_name": "Service Matcher Agent"
+          }
+        }
+      },
+      {
+        "id": "best_practices_agent",
+        "type": "ChatAnthropic",
+        "position": {
+          "x": 750,
+          "y": 450
+        },
+        "data": {
+          "node": {
+            "template": {
+              "anthropic_api_key": {
+                "type": "str",
+                "required": true,
+                "value": "",
+                "name": "anthropic_api_key",
+                "password": true
+              },
+              "model_name": {
+                "type": "str",
+                "value": "claude-3-5-sonnet-20241022",
+                "name": "model_name"
+              },
+              "temperature": {
+                "type": "float",
+                "value": 0.4,
+                "name": "temperature"
+              },
+              "max_tokens": {
+                "type": "int",
+                "value": 3000,
+                "name": "max_tokens"
+              },
+              "system_message": {
+                "type": "str",
+                "value": "Je bent een best practices expert. Op basis van de situatie, identificeer je:\n\n**Best Practices Categorieën:**\n- Implementatie methodologieën (Agile, DevOps, etc.)\n- Architectuur patterns en design principles\n- Security & compliance frameworks\n- Change management strategieën\n- Performance & scalability guidelines\n- Testing & quality assurance\n- Documentation & knowledge transfer\n\nVoor elke best practice:\n1. Beschrijving en rationale\n2. Relevantie voor deze specifieke situatie\n3. Implementatie tips\n4. Veelvoorkomende valkuilen om te vermijden\n5. Meetbare success criteria\n\nGeef output in JSON formaat met key 'best_practices' als array.",
+                "name": "system_message",
+                "multiline": true
+              },
+              "input_value": {
+                "type": "str",
+                "required": true,
+                "name": "input_value"
+              }
+            },
+            "description": "Best Practices Agent",
+            "base_classes": ["BaseChatModel"],
+            "display_name": "Best Practices Agent"
+          }
+        }
+      },
+      {
+        "id": "experience_knowledge_agent",
+        "type": "ChatAnthropic",
+        "position": {
+          "x": 750,
+          "y": 700
+        },
+        "data": {
+          "node": {
+            "template": {
+              "anthropic_api_key": {
+                "type": "str",
+                "required": true,
+                "value": "",
+                "name": "anthropic_api_key",
+                "password": true
+              },
+              "model_name": {
+                "type": "str",
+                "value": "claude-3-5-sonnet-20241022",
+                "name": "model_name"
+              },
+              "temperature": {
+                "type": "float",
+                "value": 0.5,
+                "name": "temperature"
+              },
+              "max_tokens": {
+                "type": "int",
+                "value": 3000,
+                "name": "max_tokens"
+              },
+              "system_message": {
+                "type": "str",
+                "value": "Je bent een knowledge management expert met toegang tot eerdere projecten en case studies. Genereer relevante ervaringskennis:\n\n**Vergelijkbare Cases:**\nOp basis van industrie, problematiek en services, identificeer je:\n1. Vergelijkbare projecten (geanonimiseerd)\n2. Behaalde resultaten en KPIs\n3. Lessons learned\n4. Kritische succesfactoren\n5. Risico's en mitigaties\n6. Tijdlijnen en resource requirements\n\n**Praktische Inzichten:**\n- Wat werkte goed\n- Wat zou anders kunnen\n- Specifieke tools en technologieën die succesvol waren\n- Team samenstelling aanbevelingen\n\nGeef output in JSON formaat met keys 'similar_cases' en 'practical_insights'.",
+                "name": "system_message",
+                "multiline": true
+              },
+              "input_value": {
+                "type": "str",
+                "required": true,
+                "name": "input_value"
+              }
+            },
+            "description": "Experience Knowledge Agent",
+            "base_classes": ["BaseChatModel"],
+            "display_name": "Experience Knowledge Agent"
+          }
+        }
+      },
+      {
+        "id": "proposal_generator_agent",
+        "type": "ChatAnthropic",
+        "position": {
+          "x": 1100,
+          "y": 400
+        },
+        "data": {
+          "node": {
+            "template": {
+              "anthropic_api_key": {
+                "type": "str",
+                "required": true,
+                "value": "",
+                "name": "anthropic_api_key",
+                "password": true
+              },
+              "model_name": {
+                "type": "str",
+                "value": "claude-3-5-sonnet-20241022",
+                "name": "model_name"
+              },
+              "temperature": {
+                "type": "float",
+                "value": 0.6,
+                "name": "temperature"
+              },
+              "max_tokens": {
+                "type": "int",
+                "value": 4000,
+                "name": "max_tokens"
+              },
+              "system_message": {
+                "type": "str",
+                "value": "Je bent een senior consultant die klantvoorstellen schrijft. Synthetiseer alle input tot een coherent, overtuigend voorstel:\n\n**Voorstel Structuur:**\n\n1. **Executive Summary**\n   - Situatie en uitdaging\n   - Voorgestelde aanpak\n   - Verwachte waarde en impact\n\n2. **Situatie Analyse**\n   - Huidige staat\n   - Kernuitdagingen\n   - Business impact\n\n3. **Voorgestelde Services en Aanpak**\n   - Aanbevolen services met rationale\n   - Implementatie roadmap\n   - Gefaseerde aanpak met milestones\n\n4. **Best Practices en Methodologie**\n   - Toegepaste frameworks en methodologieën\n   - Quality assurance aanpak\n   - Risk management\n\n5. **Ervaringskennis en Referenties**\n   - Vergelijkbare succesvolle projecten\n   - Lessons learned\n   - Bewezen resultaten\n\n6. **Verwachte Resultaten en KPIs**\n   - Meetbare outcomes\n   - Timeline\n   - ROI indicaties\n\n7. **Volgende Stappen**\n   - Concrete acties\n   - Beslispunten\n\nSchrijf professioneel, klantgericht, en data-driven. Gebruik concrete voorbeelden en kwantificeer waar mogelijk.",
+                "name": "system_message",
+                "multiline": true
+              },
+              "input_value": {
+                "type": "str",
+                "required": true,
+                "name": "input_value"
+              }
+            },
+            "description": "Proposal Generator Agent",
+            "base_classes": ["BaseChatModel"],
+            "display_name": "Proposal Generator Agent"
+          }
+        }
+      },
+      {
+        "id": "quality_review_agent",
+        "type": "ChatAnthropic",
+        "position": {
+          "x": 1100,
+          "y": 700
+        },
+        "data": {
+          "node": {
+            "template": {
+              "anthropic_api_key": {
+                "type": "str",
+                "required": true,
+                "value": "",
+                "name": "anthropic_api_key",
+                "password": true
+              },
+              "model_name": {
+                "type": "str",
+                "value": "claude-3-5-sonnet-20241022",
+                "name": "model_name"
+              },
+              "temperature": {
+                "type": "float",
+                "value": 0.3,
+                "name": "temperature"
+              },
+              "max_tokens": {
+                "type": "int",
+                "value": 2000,
+                "name": "max_tokens"
+              },
+              "system_message": {
+                "type": "str",
+                "value": "Je bent een kwaliteitscontroleur voor consultancy voorstellen. Review het voorstel op:\n\n**Kwaliteitscriteria:**\n1. Consistentie tussen analyse en aanbevelingen\n2. Volledigheid van de aanpak\n3. Haalbaarheid van voorstellen\n4. Alignment met klantcontext\n5. Duidelijkheid en professionaliteit van taal\n6. Concrete en meetbare outcomes\n7. Realistische tijdlijnen en verwachtingen\n\n**Output:**\nGeef een kwaliteitsscore (1-10) en:\n- Sterke punten\n- Aandachtspunten\n- Verbetervoorstellen\n- Go/No-go aanbeveling\n\nGeef output in JSON formaat.",
+                "name": "system_message",
+                "multiline": true
+              },
+              "input_value": {
+                "type": "str",
+                "required": true,
+                "name": "input_value"
+              }
+            },
+            "description": "Quality Review Agent",
+            "base_classes": ["BaseChatModel"],
+            "display_name": "Quality Review Agent"
+          }
+        }
+      },
+      {
+        "id": "proposal_refiner",
+        "type": "ChatAnthropic",
+        "position": {
+          "x": 1450,
+          "y": 400
+        },
+        "data": {
+          "node": {
+            "template": {
+              "anthropic_api_key": {
+                "type": "str",
+                "required": true,
+                "value": "",
+                "name": "anthropic_api_key",
+                "password": true
+              },
+              "model_name": {
+                "type": "str",
+                "value": "claude-3-5-sonnet-20241022",
+                "name": "model_name"
+              },
+              "temperature": {
+                "type": "float",
+                "value": 0.5,
+                "name": "temperature"
+              },
+              "max_tokens": {
+                "type": "int",
+                "value": 4000,
+                "name": "max_tokens"
+              },
+              "system_message": {
+                "type": "str",
+                "value": "Je bent een editor die het voorstel verfijnt op basis van quality feedback. Pas het voorstel aan door:\n1. Verbeterpunten te implementeren\n2. Inconsistenties op te lossen\n3. Onduidelijkheden te verduidelijken\n4. Taal te optimaliseren\n5. Structuur te verbeteren waar nodig\n\nBehoud de kern en essentie, maar maak het voorstel sterker en overtuigender.",
+                "name": "system_message",
+                "multiline": true
+              },
+              "input_value": {
+                "type": "str",
+                "required": true,
+                "name": "input_value"
+              }
+            },
+            "description": "Proposal Refiner",
+            "base_classes": ["BaseChatModel"],
+            "display_name": "Proposal Refiner"
+          }
+        }
+      },
+      {
+        "id": "final_output",
+        "type": "ChatOutput",
+        "position": {
+          "x": 1800,
+          "y": 400
+        },
+        "data": {
+          "node": {
+            "template": {
+              "input_value": {
+                "type": "str",
+                "required": true,
+                "name": "input_value"
+              }
+            },
+            "description": "Final Proposal Output",
+            "base_classes": ["Message"],
+            "display_name": "Final Proposal Output"
           }
         }
       }
-    },
-    {
-      "id": "problem_input",
-      "type": "TextInput",
-      "position": {
-        "x": 100,
-        "y": 500
+    ],
+    "edges": [
+      {
+        "id": "e1",
+        "source": "customer_input",
+        "target": "context_analysis_agent",
+        "sourceHandle": "message",
+        "targetHandle": "input_value"
       },
-      "data": {
-        "name": "Problem Description Input",
-        "description": "Specifieke problematiek en behoeften van de klant",
-        "template": {
-          "value": {
-            "type": "str",
-            "required": true,
-            "placeholder": "Beschrijf de specifieke problematiek en behoeften van de klant...",
-            "multiline": true
-          }
-        }
-      }
-    },
-    {
-      "id": "context_analysis_agent",
-      "type": "AnthropicModel",
-      "position": {
-        "x": 400,
-        "y": 200
+      {
+        "id": "e2",
+        "source": "problem_input",
+        "target": "problem_analysis_agent",
+        "sourceHandle": "message",
+        "targetHandle": "input_value"
       },
-      "data": {
-        "name": "Context Analysis Agent",
-        "description": "Analyseert klantcontext en extraheert kerngegevens",
-        "model_name": "claude-3-5-sonnet-20241022",
-        "api_key": "${ANTHROPIC_API_KEY}",
-        "temperature": 0.3,
-        "max_tokens": 2000,
-        "system_message": "Je bent een expert consultant die klantcontexten analyseert. Je taak is om:\n1. Industrie en sector te identificeren\n2. Bedrijfsgrootte en maturiteit te bepalen\n3. Kernuitdagingen te extraheren\n4. Strategische doelen te identificeren\n5. Technische volwassenheid te beoordelen\n\nGeef een gestructureerde analyse in JSON formaat met de keys: industrie, bedrijfsgrootte, maturiteit, kernuitdagingen, strategische_doelen, technische_volwassenheid.",
-        "input_variables": ["customer_context"]
-      }
-    },
-    {
-      "id": "problem_analysis_agent",
-      "type": "AnthropicModel",
-      "position": {
-        "x": 400,
-        "y": 450
+      {
+        "id": "e3",
+        "source": "context_analysis_agent",
+        "target": "service_matcher_agent",
+        "sourceHandle": "text",
+        "targetHandle": "input_value"
       },
-      "data": {
-        "name": "Problem Analysis Agent",
-        "description": "Analyseert de specifieke problematiek diepgaand",
-        "model_name": "claude-3-5-sonnet-20241022",
-        "api_key": "${ANTHROPIC_API_KEY}",
-        "temperature": 0.3,
-        "max_tokens": 2000,
-        "system_message": "Je bent een expert probleemanalyst. Analyseer de problematiek en identificeer:\n1. Kernproblemen (root causes)\n2. Symptomen vs onderliggende oorzaken\n3. Impact op business processen\n4. Urgentie en prioriteit\n5. Technische vs organisatorische aspecten\n6. Afhankelijkheden en complexiteit\n\nGeef een gestructureerde analyse in JSON formaat.",
-        "input_variables": ["problem_description", "context_analysis"]
-      }
-    },
-    {
-      "id": "service_matcher_agent",
-      "type": "AnthropicModel",
-      "position": {
-        "x": 750,
-        "y": 200
+      {
+        "id": "e4",
+        "source": "problem_analysis_agent",
+        "target": "service_matcher_agent",
+        "sourceHandle": "text",
+        "targetHandle": "input_value"
       },
-      "data": {
-        "name": "Service Matcher Agent",
-        "description": "Matcht klantbehoeften met relevante services",
-        "model_name": "claude-3-5-sonnet-20241022",
-        "api_key": "${ANTHROPIC_API_KEY}",
-        "temperature": 0.4,
-        "max_tokens": 3000,
-        "system_message": "Je bent een service matching expert. Op basis van de klantcontext en problematiek, identificeer je:\n\n**Beschikbare Services:**\n- Cloud Migration & Modernization\n- DevOps & CI/CD Implementation\n- Data Analytics & AI/ML Solutions\n- Cybersecurity & Compliance\n- Application Development & Integration\n- Infrastructure Optimization\n- Digital Transformation Consulting\n- Agile & Process Optimization\n- Training & Change Management\n\nVoor elke relevante service, geef aan:\n1. Waarom deze service relevant is\n2. Verwachte impact en waarde\n3. Implementatie complexiteit\n4. Geschatte tijdlijn\n5. Prioriteit (hoog/medium/laag)\n\nGeef output in JSON formaat met key 'recommended_services' als array.",
-        "input_variables": ["context_analysis", "problem_analysis"]
-      }
-    },
-    {
-      "id": "best_practices_agent",
-      "type": "AnthropicModel",
-      "position": {
-        "x": 750,
-        "y": 450
+      {
+        "id": "e5",
+        "source": "context_analysis_agent",
+        "target": "best_practices_agent",
+        "sourceHandle": "text",
+        "targetHandle": "input_value"
       },
-      "data": {
-        "name": "Best Practices Agent",
-        "description": "Reikt relevante best practices aan",
-        "model_name": "claude-3-5-sonnet-20241022",
-        "api_key": "${ANTHROPIC_API_KEY}",
-        "temperature": 0.4,
-        "max_tokens": 3000,
-        "system_message": "Je bent een best practices expert. Op basis van de situatie, identificeer je:\n\n**Best Practices Categorieën:**\n- Implementatie methodologieën (Agile, DevOps, etc.)\n- Architectuur patterns en design principles\n- Security & compliance frameworks\n- Change management strategieën\n- Performance & scalability guidelines\n- Testing & quality assurance\n- Documentation & knowledge transfer\n\nVoor elke best practice:\n1. Beschrijving en rationale\n2. Relevantie voor deze specifieke situatie\n3. Implementatie tips\n4. Veelvoorkomende valkuilen om te vermijden\n5. Meetbare success criteria\n\nGeef output in JSON formaat met key 'best_practices' als array.",
-        "input_variables": ["context_analysis", "problem_analysis", "recommended_services"]
-      }
-    },
-    {
-      "id": "experience_knowledge_agent",
-      "type": "AnthropicModel",
-      "position": {
-        "x": 750,
-        "y": 700
+      {
+        "id": "e6",
+        "source": "problem_analysis_agent",
+        "target": "best_practices_agent",
+        "sourceHandle": "text",
+        "targetHandle": "input_value"
       },
-      "data": {
-        "name": "Experience Knowledge Agent",
-        "description": "Haalt relevante ervaringskennis en case studies op",
-        "model_name": "claude-3-5-sonnet-20241022",
-        "api_key": "${ANTHROPIC_API_KEY}",
-        "temperature": 0.5,
-        "max_tokens": 3000,
-        "system_message": "Je bent een knowledge management expert met toegang tot eerdere projecten en case studies. Genereer relevante ervaringskennis:\n\n**Vergelijkbare Cases:**\nOp basis van industrie, problematiek en services, identificeer je:\n1. Vergelijkbare projecten (geanonimiseerd)\n2. Behaalde resultaten en KPIs\n3. Lessons learned\n4. Kritische succesfactoren\n5. Risico's en mitigaties\n6. Tijdlijnen en resource requirements\n\n**Praktische Inzichten:**\n- Wat werkte goed\n- Wat zou anders kunnen\n- Specifieke tools en technologieën die succesvol waren\n- Team samenstelling aanbevelingen\n\nGeef output in JSON formaat met keys 'similar_cases' en 'practical_insights'.",
-        "input_variables": ["context_analysis", "problem_analysis", "recommended_services"]
-      }
-    },
-    {
-      "id": "proposal_generator_agent",
-      "type": "AnthropicModel",
-      "position": {
-        "x": 1100,
-        "y": 400
+      {
+        "id": "e7",
+        "source": "service_matcher_agent",
+        "target": "best_practices_agent",
+        "sourceHandle": "text",
+        "targetHandle": "input_value"
       },
-      "data": {
-        "name": "Proposal Generator Agent",
-        "description": "Genereert geïntegreerd klantvoorstel",
-        "model_name": "claude-3-5-sonnet-20241022",
-        "api_key": "${ANTHROPIC_API_KEY}",
-        "temperature": 0.6,
-        "max_tokens": 4000,
-        "system_message": "Je bent een senior consultant die klantvoorstellen schrijft. Synthetiseer alle input tot een coherent, overtuigend voorstel:\n\n**Voorstel Structuur:**\n\n1. **Executive Summary**\n   - Situatie en uitdaging\n   - Voorgestelde aanpak\n   - Verwachte waarde en impact\n\n2. **Situatie Analyse**\n   - Huidige staat\n   - Kernuitdagingen\n   - Business impact\n\n3. **Voorgestelde Services en Aanpak**\n   - Aanbevolen services met rationale\n   - Implementatie roadmap\n   - Gefaseerde aanpak met milestones\n\n4. **Best Practices en Methodologie**\n   - Toegepaste frameworks en methodologieën\n   - Quality assurance aanpak\n   - Risk management\n\n5. **Ervaringskennis en Referenties**\n   - Vergelijkbare succesvolle projecten\n   - Lessons learned\n   - Bewezen resultaten\n\n6. **Verwachte Resultaten en KPIs**\n   - Meetbare outcomes\n   - Timeline\n   - ROI indicaties\n\n7. **Volgende Stappen**\n   - Concrete acties\n   - Beslispunten\n\nSchrijf professioneel, klantgericht, en data-driven. Gebruik concrete voorbeelden en kwantificeer waar mogelijk.",
-        "input_variables": [
-          "customer_context",
-          "problem_description",
-          "context_analysis",
-          "problem_analysis",
-          "recommended_services",
-          "best_practices",
-          "experience_knowledge"
-        ]
-      }
-    },
-    {
-      "id": "quality_review_agent",
-      "type": "AnthropicModel",
-      "position": {
-        "x": 1100,
-        "y": 700
+      {
+        "id": "e8",
+        "source": "context_analysis_agent",
+        "target": "experience_knowledge_agent",
+        "sourceHandle": "text",
+        "targetHandle": "input_value"
       },
-      "data": {
-        "name": "Quality Review Agent",
-        "description": "Reviewt het voorstel op kwaliteit en consistentie",
-        "model_name": "claude-3-5-sonnet-20241022",
-        "api_key": "${ANTHROPIC_API_KEY}",
-        "temperature": 0.3,
-        "max_tokens": 2000,
-        "system_message": "Je bent een kwaliteitscontroleur voor consultancy voorstellen. Review het voorstel op:\n\n**Kwaliteitscriteria:**\n1. Consistentie tussen analyse en aanbevelingen\n2. Volledigheid van de aanpak\n3. Haalbaarheid van voorstellen\n4. Alignment met klantcontext\n5. Duidelijkheid en professionaliteit van taal\n6. Concrete en meetbare outcomes\n7. Realistische tijdlijnen en verwachtingen\n\n**Output:**\nGeef een kwaliteitsscore (1-10) en:\n- Sterke punten\n- Aandachtspunten\n- Verbetervoorstellen\n- Go/No-go aanbeveling\n\nGeef output in JSON formaat.",
-        "input_variables": ["proposal"]
-      }
-    },
-    {
-      "id": "proposal_refiner",
-      "type": "AnthropicModel",
-      "position": {
-        "x": 1450,
-        "y": 400
+      {
+        "id": "e9",
+        "source": "problem_analysis_agent",
+        "target": "experience_knowledge_agent",
+        "sourceHandle": "text",
+        "targetHandle": "input_value"
       },
-      "data": {
-        "name": "Proposal Refiner",
-        "description": "Verfijnt het voorstel op basis van quality review",
-        "model_name": "claude-3-5-sonnet-20241022",
-        "api_key": "${ANTHROPIC_API_KEY}",
-        "temperature": 0.5,
-        "max_tokens": 4000,
-        "system_message": "Je bent een editor die het voorstel verfijnt op basis van quality feedback. Pas het voorstel aan door:\n1. Verbeterpunten te implementeren\n2. Inconsistenties op te lossen\n3. Onduidelijkheden te verduidelijken\n4. Taal te optimaliseren\n5. Structuur te verbeteren waar nodig\n\nBehoud de kern en essentie, maar maak het voorstel sterker en overtuigender.",
-        "input_variables": ["proposal", "quality_review"]
-      }
-    },
-    {
-      "id": "final_output",
-      "type": "TextOutput",
-      "position": {
-        "x": 1800,
-        "y": 400
+      {
+        "id": "e10",
+        "source": "service_matcher_agent",
+        "target": "experience_knowledge_agent",
+        "sourceHandle": "text",
+        "targetHandle": "input_value"
       },
-      "data": {
-        "name": "Final Proposal Output",
-        "description": "Definitief klantvoorstel",
-        "template": {
-          "value": {
-            "type": "str"
-          }
-        }
-      }
-    },
-    {
-      "id": "metadata_output",
-      "type": "JSONOutput",
-      "position": {
-        "x": 1800,
-        "y": 600
+      {
+        "id": "e11",
+        "source": "customer_input",
+        "target": "proposal_generator_agent",
+        "sourceHandle": "message",
+        "targetHandle": "input_value"
       },
-      "data": {
-        "name": "Metadata & Analytics Output",
-        "description": "Metadata voor tracking en analytics",
-        "template": {
-          "metadata": {
-            "context_analysis": "{{context_analysis}}",
-            "problem_analysis": "{{problem_analysis}}",
-            "recommended_services": "{{recommended_services}}",
-            "quality_score": "{{quality_review}}",
-            "timestamp": "{{timestamp}}"
-          }
-        }
+      {
+        "id": "e12",
+        "source": "problem_input",
+        "target": "proposal_generator_agent",
+        "sourceHandle": "message",
+        "targetHandle": "input_value"
+      },
+      {
+        "id": "e13",
+        "source": "context_analysis_agent",
+        "target": "proposal_generator_agent",
+        "sourceHandle": "text",
+        "targetHandle": "input_value"
+      },
+      {
+        "id": "e14",
+        "source": "problem_analysis_agent",
+        "target": "proposal_generator_agent",
+        "sourceHandle": "text",
+        "targetHandle": "input_value"
+      },
+      {
+        "id": "e15",
+        "source": "service_matcher_agent",
+        "target": "proposal_generator_agent",
+        "sourceHandle": "text",
+        "targetHandle": "input_value"
+      },
+      {
+        "id": "e16",
+        "source": "best_practices_agent",
+        "target": "proposal_generator_agent",
+        "sourceHandle": "text",
+        "targetHandle": "input_value"
+      },
+      {
+        "id": "e17",
+        "source": "experience_knowledge_agent",
+        "target": "proposal_generator_agent",
+        "sourceHandle": "text",
+        "targetHandle": "input_value"
+      },
+      {
+        "id": "e18",
+        "source": "proposal_generator_agent",
+        "target": "quality_review_agent",
+        "sourceHandle": "text",
+        "targetHandle": "input_value"
+      },
+      {
+        "id": "e19",
+        "source": "proposal_generator_agent",
+        "target": "proposal_refiner",
+        "sourceHandle": "text",
+        "targetHandle": "input_value"
+      },
+      {
+        "id": "e20",
+        "source": "quality_review_agent",
+        "target": "proposal_refiner",
+        "sourceHandle": "text",
+        "targetHandle": "input_value"
+      },
+      {
+        "id": "e21",
+        "source": "proposal_refiner",
+        "target": "final_output",
+        "sourceHandle": "text",
+        "targetHandle": "input_value"
       }
+    ],
+    "viewport": {
+      "x": 0,
+      "y": 0,
+      "zoom": 0.7
     }
-  ],
-  "edges": [
-    {
-      "id": "e1",
-      "source": "customer_input",
-      "target": "context_analysis_agent",
-      "sourceHandle": "value",
-      "targetHandle": "customer_context"
-    },
-    {
-      "id": "e2",
-      "source": "problem_input",
-      "target": "problem_analysis_agent",
-      "sourceHandle": "value",
-      "targetHandle": "problem_description"
-    },
-    {
-      "id": "e3",
-      "source": "context_analysis_agent",
-      "target": "problem_analysis_agent",
-      "sourceHandle": "output",
-      "targetHandle": "context_analysis"
-    },
-    {
-      "id": "e4",
-      "source": "context_analysis_agent",
-      "target": "service_matcher_agent",
-      "sourceHandle": "output",
-      "targetHandle": "context_analysis"
-    },
-    {
-      "id": "e5",
-      "source": "problem_analysis_agent",
-      "target": "service_matcher_agent",
-      "sourceHandle": "output",
-      "targetHandle": "problem_analysis"
-    },
-    {
-      "id": "e6",
-      "source": "context_analysis_agent",
-      "target": "best_practices_agent",
-      "sourceHandle": "output",
-      "targetHandle": "context_analysis"
-    },
-    {
-      "id": "e7",
-      "source": "problem_analysis_agent",
-      "target": "best_practices_agent",
-      "sourceHandle": "output",
-      "targetHandle": "problem_analysis"
-    },
-    {
-      "id": "e8",
-      "source": "service_matcher_agent",
-      "target": "best_practices_agent",
-      "sourceHandle": "output",
-      "targetHandle": "recommended_services"
-    },
-    {
-      "id": "e9",
-      "source": "context_analysis_agent",
-      "target": "experience_knowledge_agent",
-      "sourceHandle": "output",
-      "targetHandle": "context_analysis"
-    },
-    {
-      "id": "e10",
-      "source": "problem_analysis_agent",
-      "target": "experience_knowledge_agent",
-      "sourceHandle": "output",
-      "targetHandle": "problem_analysis"
-    },
-    {
-      "id": "e11",
-      "source": "service_matcher_agent",
-      "target": "experience_knowledge_agent",
-      "sourceHandle": "output",
-      "targetHandle": "recommended_services"
-    },
-    {
-      "id": "e12",
-      "source": "customer_input",
-      "target": "proposal_generator_agent",
-      "sourceHandle": "value",
-      "targetHandle": "customer_context"
-    },
-    {
-      "id": "e13",
-      "source": "problem_input",
-      "target": "proposal_generator_agent",
-      "sourceHandle": "value",
-      "targetHandle": "problem_description"
-    },
-    {
-      "id": "e14",
-      "source": "context_analysis_agent",
-      "target": "proposal_generator_agent",
-      "sourceHandle": "output",
-      "targetHandle": "context_analysis"
-    },
-    {
-      "id": "e15",
-      "source": "problem_analysis_agent",
-      "target": "proposal_generator_agent",
-      "sourceHandle": "output",
-      "targetHandle": "problem_analysis"
-    },
-    {
-      "id": "e16",
-      "source": "service_matcher_agent",
-      "target": "proposal_generator_agent",
-      "sourceHandle": "output",
-      "targetHandle": "recommended_services"
-    },
-    {
-      "id": "e17",
-      "source": "best_practices_agent",
-      "target": "proposal_generator_agent",
-      "sourceHandle": "output",
-      "targetHandle": "best_practices"
-    },
-    {
-      "id": "e18",
-      "source": "experience_knowledge_agent",
-      "target": "proposal_generator_agent",
-      "sourceHandle": "output",
-      "targetHandle": "experience_knowledge"
-    },
-    {
-      "id": "e19",
-      "source": "proposal_generator_agent",
-      "target": "quality_review_agent",
-      "sourceHandle": "output",
-      "targetHandle": "proposal"
-    },
-    {
-      "id": "e20",
-      "source": "proposal_generator_agent",
-      "target": "proposal_refiner",
-      "sourceHandle": "output",
-      "targetHandle": "proposal"
-    },
-    {
-      "id": "e21",
-      "source": "quality_review_agent",
-      "target": "proposal_refiner",
-      "sourceHandle": "output",
-      "targetHandle": "quality_review"
-    },
-    {
-      "id": "e22",
-      "source": "proposal_refiner",
-      "target": "final_output",
-      "sourceHandle": "output",
-      "targetHandle": "value"
-    },
-    {
-      "id": "e23",
-      "source": "context_analysis_agent",
-      "target": "metadata_output",
-      "sourceHandle": "output",
-      "targetHandle": "context_analysis"
-    },
-    {
-      "id": "e24",
-      "source": "problem_analysis_agent",
-      "target": "metadata_output",
-      "sourceHandle": "output",
-      "targetHandle": "problem_analysis"
-    },
-    {
-      "id": "e25",
-      "source": "service_matcher_agent",
-      "target": "metadata_output",
-      "sourceHandle": "output",
-      "targetHandle": "recommended_services"
-    },
-    {
-      "id": "e26",
-      "source": "quality_review_agent",
-      "target": "metadata_output",
-      "sourceHandle": "output",
-      "targetHandle": "quality_review"
-    }
-  ],
-  "viewport": {
-    "x": 0,
-    "y": 0,
-    "zoom": 0.7
-  }
+  },
+  "is_component": false
 }
