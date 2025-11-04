@@ -1,0 +1,1076 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>American Inno Canva Template - Visual Preview</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background: #f0f0f0;
+            padding: 40px 20px;
+            line-height: 1.6;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            color: #0A2463;
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+
+        .header p {
+            font-size: 20px;
+            color: #6C757D;
+            margin-bottom: 24px;
+        }
+
+        .color-palette {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-top: 32px;
+        }
+
+        .color-swatch {
+            text-align: center;
+        }
+
+        .color-box {
+            width: 80px;
+            height: 80px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+
+        .color-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: #212529;
+        }
+
+        .color-code {
+            font-size: 11px;
+            color: #6C757D;
+            font-family: monospace;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .slide-wrapper {
+            margin-bottom: 60px;
+        }
+
+        .slide-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 28px;
+            color: #0A2463;
+            margin-bottom: 12px;
+            padding-left: 8px;
+        }
+
+        .slide-description {
+            font-size: 16px;
+            color: #6C757D;
+            margin-bottom: 20px;
+            padding-left: 8px;
+        }
+
+        .slide {
+            aspect-ratio: 16 / 9;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Slide 1: Title Slide */
+        .title-slide {
+            background: linear-gradient(135deg, #0A2463 0%, #0096C7 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 80px;
+            position: relative;
+        }
+
+        .title-slide::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 12px;
+            background: #FB5607;
+        }
+
+        .title-slide h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: 72px;
+            color: white;
+            text-align: center;
+            margin-bottom: 24px;
+            line-height: 1.2;
+        }
+
+        .title-slide .subtitle {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 36px;
+            color: #00B4D8;
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .title-slide .presenter {
+            position: absolute;
+            bottom: 40px;
+            right: 60px;
+            font-size: 20px;
+            color: rgba(255,255,255,0.9);
+            text-align: right;
+        }
+
+        .title-slide .logo {
+            position: absolute;
+            top: 40px;
+            left: 60px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: 32px;
+            color: white;
+        }
+
+        /* Slide 2: Section Header */
+        .section-slide {
+            background: #F8F9FA;
+            display: flex;
+            align-items: center;
+            padding: 80px 80px 80px 100px;
+            position: relative;
+        }
+
+        .section-slide::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 16px;
+            background: #FB5607;
+        }
+
+        .section-number {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 24px;
+            color: #FB5607;
+            margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: 60px;
+            color: #0A2463;
+            margin-bottom: 24px;
+            line-height: 1.2;
+        }
+
+        .section-description {
+            font-size: 28px;
+            color: #6C757D;
+            line-height: 1.4;
+        }
+
+        /* Slide 3: Content Slide */
+        .content-slide {
+            padding: 60px 80px;
+        }
+
+        .content-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            padding-bottom: 16px;
+            border-bottom: 3px solid #00B4D8;
+        }
+
+        .content-header h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 48px;
+            color: #0A2463;
+        }
+
+        .page-number {
+            font-size: 18px;
+            color: #6C757D;
+        }
+
+        .bullet-list {
+            list-style: none;
+            margin-top: 40px;
+        }
+
+        .bullet-list li {
+            margin-bottom: 32px;
+            padding-left: 40px;
+            position: relative;
+        }
+
+        .bullet-list li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 8px;
+            width: 16px;
+            height: 16px;
+            background: #FB5607;
+            border-radius: 50%;
+        }
+
+        .bullet-list li strong {
+            font-size: 24px;
+            color: #212529;
+            font-weight: 600;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .bullet-list li span {
+            font-size: 20px;
+            color: #6C757D;
+        }
+
+        /* Slide 4: Image + Text */
+        .image-text-slide {
+            padding: 60px 80px;
+            display: flex;
+            gap: 60px;
+        }
+
+        .image-text-slide .content-header {
+            grid-column: 1 / -1;
+        }
+
+        .image-section {
+            flex: 3;
+        }
+
+        .text-section {
+            flex: 2;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .image-placeholder {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(135deg, #0096C7, #00B4D8);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            border: 4px solid #00B4D8;
+        }
+
+        /* Slide 5: Statistics */
+        .stats-slide {
+            padding: 60px 80px;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border-top: 8px solid;
+        }
+
+        .stat-card:nth-child(1) { border-top-color: #00B4D8; }
+        .stat-card:nth-child(2) { border-top-color: #FB5607; }
+        .stat-card:nth-child(3) { border-top-color: #0096C7; }
+
+        .stat-number {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: 64px;
+            color: #0A2463;
+            margin-bottom: 16px;
+        }
+
+        .stat-label {
+            font-size: 20px;
+            color: #6C757D;
+            font-weight: 600;
+        }
+
+        .stats-context {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 22px;
+            color: #212529;
+        }
+
+        /* Slide 6: Quote */
+        .quote-slide {
+            background: #0A2463;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 100px 120px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .quote-slide::before {
+            content: '"';
+            position: absolute;
+            top: 40px;
+            left: 60px;
+            font-size: 200px;
+            color: rgba(251, 86, 7, 0.2);
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            line-height: 1;
+        }
+
+        .quote-text {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 300;
+            font-style: italic;
+            font-size: 36px;
+            color: white;
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .quote-attribution {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .quote-attribution .name {
+            font-size: 24px;
+            color: #00B4D8;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .quote-attribution .title {
+            font-size: 20px;
+            color: rgba(255,255,255,0.8);
+        }
+
+        /* Slide 7: Comparison */
+        .comparison-slide {
+            padding: 60px 80px;
+        }
+
+        .comparison-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            margin-top: 40px;
+        }
+
+        .comparison-column {
+            padding: 40px;
+            border-radius: 12px;
+        }
+
+        .comparison-column:first-child {
+            background: rgba(0, 180, 216, 0.05);
+        }
+
+        .comparison-column:last-child {
+            background: rgba(251, 86, 7, 0.05);
+        }
+
+        .comparison-column h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 32px;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 3px solid;
+        }
+
+        .comparison-column:first-child h3 {
+            color: #00B4D8;
+            border-color: #00B4D8;
+        }
+
+        .comparison-column:last-child h3 {
+            color: #FB5607;
+            border-color: #FB5607;
+        }
+
+        .comparison-column ul {
+            list-style: none;
+        }
+
+        .comparison-column li {
+            padding: 16px 0 16px 32px;
+            position: relative;
+            font-size: 20px;
+            color: #212529;
+        }
+
+        .comparison-column li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            font-size: 24px;
+        }
+
+        .comparison-column:first-child li::before { color: #00B4D8; }
+        .comparison-column:last-child li::before { color: #FB5607; }
+
+        /* Slide 8: Timeline */
+        .timeline-slide {
+            padding: 60px 80px;
+        }
+
+        .timeline-container {
+            margin-top: 60px;
+            position: relative;
+        }
+
+        .timeline-line {
+            position: absolute;
+            top: 20px;
+            left: 100px;
+            right: 100px;
+            height: 4px;
+            background: #00B4D8;
+        }
+
+        .timeline-events {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            position: relative;
+            padding: 0 60px;
+        }
+
+        .timeline-event {
+            text-align: center;
+            position: relative;
+        }
+
+        .timeline-dot {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .timeline-event:nth-child(1) .timeline-dot { background: #FB5607; }
+        .timeline-event:nth-child(2) .timeline-dot { background: #FB5607; }
+        .timeline-event:nth-child(3) .timeline-dot {
+            background: #0096C7;
+            box-shadow: 0 0 0 8px rgba(0, 150, 199, 0.2);
+        }
+        .timeline-event:nth-child(4) .timeline-dot {
+            background: white;
+            border: 3px solid #00B4D8;
+        }
+
+        .timeline-date {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 20px;
+            color: #0A2463;
+            margin-bottom: 12px;
+        }
+
+        .timeline-title {
+            font-weight: 600;
+            font-size: 22px;
+            color: #212529;
+            margin-bottom: 8px;
+        }
+
+        .timeline-detail {
+            font-size: 16px;
+            color: #6C757D;
+        }
+
+        /* Slide 9: Team */
+        .team-slide {
+            padding: 60px 80px;
+        }
+
+        .team-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 60px;
+            margin-top: 40px;
+        }
+
+        .team-member {
+            text-align: center;
+        }
+
+        .team-photo {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #0096C7, #00B4D8);
+            border: 6px solid #00B4D8;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 48px;
+            font-weight: 700;
+        }
+
+        .team-name {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 24px;
+            color: #0A2463;
+            margin-bottom: 8px;
+        }
+
+        .team-title {
+            font-size: 20px;
+            color: #6C757D;
+            margin-bottom: 8px;
+        }
+
+        .team-email {
+            font-size: 18px;
+            color: #0096C7;
+        }
+
+        /* Slide 10: Thank You */
+        .thankyou-slide {
+            background: linear-gradient(135deg, #0096C7 0%, #0A2463 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 80px;
+            position: relative;
+        }
+
+        .thankyou-slide h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: 72px;
+            color: white;
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .thankyou-slide .tagline {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 300;
+            font-size: 32px;
+            color: #00B4D8;
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .contact-bar {
+            width: 80px;
+            height: 4px;
+            background: #FB5607;
+            margin: 0 auto 24px;
+        }
+
+        .contact-info {
+            text-align: center;
+            font-size: 24px;
+            color: white;
+        }
+
+        .contact-info a {
+            color: white;
+            text-decoration: none;
+            margin: 0 16px;
+        }
+
+        .thankyou-logo {
+            margin-top: 60px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: 36px;
+            color: white;
+        }
+
+        /* Instructions */
+        .instructions {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            margin-top: 60px;
+        }
+
+        .instructions h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 32px;
+            color: #0A2463;
+            margin-bottom: 24px;
+        }
+
+        .instructions h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 24px;
+            color: #0A2463;
+            margin-top: 32px;
+            margin-bottom: 16px;
+        }
+
+        .instructions ol, .instructions ul {
+            margin-left: 24px;
+            line-height: 1.8;
+        }
+
+        .instructions li {
+            margin-bottom: 12px;
+            font-size: 16px;
+            color: #212529;
+        }
+
+        .instructions code {
+            background: #F8F9FA;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-family: monospace;
+            color: #E63946;
+        }
+
+        @media print {
+            body {
+                background: white;
+            }
+            .slide-wrapper {
+                page-break-after: always;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>American Inno Presentation Template</h1>
+            <p>Professional Canva Template for 16:9 Presentations</p>
+            <p style="font-size: 16px; color: #00B4D8; font-weight: 600;">Tech • Innovation • Startups</p>
+
+            <div class="color-palette">
+                <div class="color-swatch">
+                    <div class="color-box" style="background: #0A2463;"></div>
+                    <div class="color-label">Deep Blue</div>
+                    <div class="color-code">#0A2463</div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-box" style="background: #00B4D8;"></div>
+                    <div class="color-label">Bright Teal</div>
+                    <div class="color-code">#00B4D8</div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-box" style="background: #0096C7;"></div>
+                    <div class="color-label">Electric Blue</div>
+                    <div class="color-code">#0096C7</div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-box" style="background: #FB5607;"></div>
+                    <div class="color-label">Coral Orange</div>
+                    <div class="color-code">#FB5607</div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-box" style="background: #E63946;"></div>
+                    <div class="color-label">Vibrant Red</div>
+                    <div class="color-code">#E63946</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 1: Title -->
+        <div class="slide-wrapper">
+            <div class="slide-title">1. Title Slide</div>
+            <div class="slide-description">Opening slide with presentation title and presenter information</div>
+            <div class="slide title-slide">
+                <div class="logo">INNO</div>
+                <h1>Innovation Ecosystem<br>2025</h1>
+                <div class="subtitle">Powering Local Startups & Technology</div>
+                <div class="presenter">
+                    Your Name<br>
+                    November 4, 2025
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2: Section Header -->
+        <div class="slide-wrapper">
+            <div class="slide-title">2. Section Header Slide</div>
+            <div class="slide-description">Introduce new sections or chapters of your presentation</div>
+            <div class="slide section-slide">
+                <div>
+                    <div class="section-number">01</div>
+                    <div class="section-title">Market<br>Overview</div>
+                    <div class="section-description">Analyzing current trends and opportunities in the innovation economy</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Content -->
+        <div class="slide-wrapper">
+            <div class="slide-title">3. Content Slide - Text Heavy</div>
+            <div class="slide-description">Main content with bullet points for key information</div>
+            <div class="slide content-slide">
+                <div class="content-header">
+                    <h2>Key Insights</h2>
+                    <span class="page-number">03</span>
+                </div>
+                <ul class="bullet-list">
+                    <li>
+                        <strong>Startup Ecosystem Growth</strong>
+                        <span>40+ markets showing increased venture capital activity and founder engagement across technology sectors</span>
+                    </li>
+                    <li>
+                        <strong>Innovation Hubs Expanding</strong>
+                        <span>Emerging tech centers attracting talent and investment, creating new opportunities for entrepreneurs</span>
+                    </li>
+                    <li>
+                        <strong>Community-Driven Development</strong>
+                        <span>Local partnerships strengthening ecosystem connections and supporting sustainable business growth</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 4: Image + Text -->
+        <div class="slide-wrapper">
+            <div class="slide-title">4. Image + Text Slide</div>
+            <div class="slide-description">Visual storytelling with supporting text and bullet points</div>
+            <div class="slide content-slide" style="padding: 60px 80px;">
+                <div class="content-header">
+                    <h2>Innovation in Action</h2>
+                    <span class="page-number">04</span>
+                </div>
+                <div style="display: grid; grid-template-columns: 3fr 2fr; gap: 60px; margin-top: 40px;">
+                    <div class="image-placeholder">
+                        [Startup Team Photo]
+                    </div>
+                    <div style="display: flex; flex-direction: column; justify-content: center;">
+                        <ul class="bullet-list">
+                            <li>
+                                <strong>Collaboration</strong>
+                                <span>Building strong teams</span>
+                            </li>
+                            <li>
+                                <strong>Technology</strong>
+                                <span>Leveraging innovation</span>
+                            </li>
+                            <li>
+                                <strong>Impact</strong>
+                                <span>Creating real change</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Statistics -->
+        <div class="slide-wrapper">
+            <div class="slide-title">5. Data/Statistics Slide</div>
+            <div class="slide-description">Showcase key metrics and numbers that matter</div>
+            <div class="slide stats-slide">
+                <div class="content-header">
+                    <h2>By The Numbers</h2>
+                    <span class="page-number">05</span>
+                </div>
+                <div class="stats-container">
+                    <div class="stat-card">
+                        <div class="stat-number">85%</div>
+                        <div class="stat-label">Growth Rate</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">2.5x</div>
+                        <div class="stat-label">YoY Increase</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">$10M</div>
+                        <div class="stat-label">Funding Raised</div>
+                    </div>
+                </div>
+                <div class="stats-context">
+                    Performance metrics demonstrate strong momentum in Q4 2025
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Quote -->
+        <div class="slide-wrapper">
+            <div class="slide-title">6. Quote Slide</div>
+            <div class="slide-description">Highlight testimonials or impactful statements</div>
+            <div class="slide quote-slide">
+                <div class="quote-text">
+                    Innovation distinguishes between a leader and a follower. The startup ecosystem thrives on bold ideas and fearless execution.
+                </div>
+                <div class="quote-attribution">
+                    <div class="name">Jane Entrepreneur</div>
+                    <div class="title">CEO & Founder, TechStart Inc.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: Comparison -->
+        <div class="slide-wrapper">
+            <div class="slide-title">7. Two-Column Comparison</div>
+            <div class="slide-description">Compare options, approaches, or before/after scenarios</div>
+            <div class="slide comparison-slide">
+                <div class="content-header">
+                    <h2>Traditional vs. Innovation</h2>
+                    <span class="page-number">07</span>
+                </div>
+                <div class="comparison-container">
+                    <div class="comparison-column">
+                        <h3>Traditional Approach</h3>
+                        <ul>
+                            <li>Hierarchical structures</li>
+                            <li>Slower decision making</li>
+                            <li>Risk-averse culture</li>
+                            <li>Limited flexibility</li>
+                        </ul>
+                    </div>
+                    <div class="comparison-column">
+                        <h3>Innovation Model</h3>
+                        <ul>
+                            <li>Agile methodologies</li>
+                            <li>Rapid iteration cycles</li>
+                            <li>Experimental mindset</li>
+                            <li>Adaptive systems</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8: Timeline -->
+        <div class="slide-wrapper">
+            <div class="slide-title">8. Timeline Slide</div>
+            <div class="slide-description">Show progression, milestones, or roadmap</div>
+            <div class="slide timeline-slide">
+                <div class="content-header">
+                    <h2>Growth Roadmap</h2>
+                    <span class="page-number">08</span>
+                </div>
+                <div class="timeline-container">
+                    <div class="timeline-line"></div>
+                    <div class="timeline-events">
+                        <div class="timeline-event">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-date">Q1 2025</div>
+                            <div class="timeline-title">Launch</div>
+                            <div class="timeline-detail">Product launch in 5 cities</div>
+                        </div>
+                        <div class="timeline-event">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-date">Q2 2025</div>
+                            <div class="timeline-title">Expansion</div>
+                            <div class="timeline-detail">Scale to 20 markets</div>
+                        </div>
+                        <div class="timeline-event">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-date">Q3 2025</div>
+                            <div class="timeline-title">Optimization</div>
+                            <div class="timeline-detail">Current phase</div>
+                        </div>
+                        <div class="timeline-event">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-date">Q4 2025</div>
+                            <div class="timeline-title">Scale</div>
+                            <div class="timeline-detail">National rollout</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 9: Team -->
+        <div class="slide-wrapper">
+            <div class="slide-title">9. Team/Contact Slide</div>
+            <div class="slide-description">Showcase team members or contact information</div>
+            <div class="slide team-slide">
+                <div class="content-header">
+                    <h2>Our Team</h2>
+                    <span class="page-number">09</span>
+                </div>
+                <div class="team-container">
+                    <div class="team-member">
+                        <div class="team-photo">AS</div>
+                        <div class="team-name">Alex Smith</div>
+                        <div class="team-title">Chief Executive Officer</div>
+                        <div class="team-email">alex@company.com</div>
+                    </div>
+                    <div class="team-member">
+                        <div class="team-photo">JD</div>
+                        <div class="team-name">Jordan Davis</div>
+                        <div class="team-title">Head of Innovation</div>
+                        <div class="team-email">jordan@company.com</div>
+                    </div>
+                    <div class="team-member">
+                        <div class="team-photo">SK</div>
+                        <div class="team-name">Sam Kim</div>
+                        <div class="team-title">Technology Director</div>
+                        <div class="team-email">sam@company.com</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 10: Thank You -->
+        <div class="slide-wrapper">
+            <div class="slide-title">10. Thank You / Closing Slide</div>
+            <div class="slide-description">End presentation with call-to-action and contact info</div>
+            <div class="slide thankyou-slide">
+                <h1>Thank You</h1>
+                <div class="tagline">Let's Build the Future Together</div>
+                <div class="contact-bar"></div>
+                <div class="contact-info">
+                    <a href="#">www.americaninno.com</a> •
+                    <a href="#">hello@inno.com</a> •
+                    <a href="#">@AmericanInno</a>
+                </div>
+                <div class="thankyou-logo">INNO</div>
+            </div>
+        </div>
+
+        <!-- Instructions -->
+        <div class="instructions">
+            <h2>How to Use This Template in Canva</h2>
+
+            <h3>Step 1: Create Your Presentation</h3>
+            <ol>
+                <li>Go to <strong>Canva.com</strong> and sign in</li>
+                <li>Click <strong>"Create a design"</strong> → Select <strong>"Presentation (16:9)"</strong></li>
+                <li>Your canvas size will be automatically set to 1920 x 1080 px</li>
+            </ol>
+
+            <h3>Step 2: Set Up Brand Colors</h3>
+            <ol>
+                <li>Click on your profile icon → <strong>"Brand Kit"</strong> (Canva Pro feature)</li>
+                <li>Add these hex codes to your brand palette:
+                    <ul>
+                        <li><code>#0A2463</code> (Deep Blue - Primary)</li>
+                        <li><code>#00B4D8</code> (Bright Teal - Secondary)</li>
+                        <li><code>#0096C7</code> (Electric Blue - Accent)</li>
+                        <li><code>#FB5607</code> (Coral Orange - Highlight)</li>
+                        <li><code>#E63946</code> (Vibrant Red - Emphasis)</li>
+                    </ul>
+                </li>
+            </ol>
+
+            <h3>Step 3: Set Up Typography</h3>
+            <ol>
+                <li>In Canva, search for these fonts:
+                    <ul>
+                        <li><strong>Headlines:</strong> Montserrat Bold (or Poppins Bold)</li>
+                        <li><strong>Body Text:</strong> Open Sans Regular (or Lato)</li>
+                    </ul>
+                </li>
+                <li>Add them to your Brand Kit for quick access</li>
+            </ol>
+
+            <h3>Step 4: Create Each Slide</h3>
+            <p>Use the visual examples above as reference. For each slide:</p>
+            <ol>
+                <li>Add a new slide in Canva</li>
+                <li>Set the background color or gradient (use the gradient tool for title/thank you slides)</li>
+                <li>Add text boxes with the specified font sizes and colors</li>
+                <li>Use <strong>Elements → Shapes</strong> for accent bars, circles, and decorative elements</li>
+                <li>Add placeholders for images using <strong>Elements → Photos</strong></li>
+                <li>Apply 12px rounded corners to images (click image → Edit image → Round corners)</li>
+            </ol>
+
+            <h3>Step 5: Create Reusable Elements</h3>
+            <ul>
+                <li><strong>Logo:</strong> Add "INNO" text or your own logo in top-left of slides</li>
+                <li><strong>Page Numbers:</strong> Add text box in bottom-right corner</li>
+                <li><strong>Accent Lines:</strong> Use line tool with specified px widths</li>
+                <li><strong>Bullet Points:</strong> Use custom bullets by adding small circles (Elements → Shapes)</li>
+            </ul>
+
+            <h3>Step 6: Save as Template</h3>
+            <ol>
+                <li>Once all slides are created, click <strong>"File" → "Make a copy"</strong></li>
+                <li>Save this as your master template</li>
+                <li>For each new presentation, make a copy and customize the content</li>
+            </ol>
+
+            <h3>Pro Tips:</h3>
+            <ul>
+                <li><strong>Consistency:</strong> Use 40px margins on all slides for uniform spacing</li>
+                <li><strong>Alignment:</strong> Use Canva's alignment guides (View → Show rulers & guides)</li>
+                <li><strong>Transitions:</strong> Keep it simple - use "Fade" or "Dissolve" (0.5-0.8 seconds)</li>
+                <li><strong>Images:</strong> Use high-quality photos (Canva has great stock photos, search "tech startup" or "innovation")</li>
+                <li><strong>Export:</strong> Download as PDF for sharing, or as PNG for individual slides</li>
+            </ul>
+
+            <h3>Additional Resources:</h3>
+            <ul>
+                <li>Full detailed specifications: See <code>canva-template-specification.md</code></li>
+                <li>For icons: Search "tech icons line" or "business icons" in Canva Elements</li>
+                <li>For charts: Use Canva's chart tool and customize with brand colors</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
